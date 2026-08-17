@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 56" width="300" height="56" role="img" aria-label="IBM Quantum">
+  <title>IBM Quantum</title>
+  <!--
+    The "IBM Quantum" lockup, set in IBM Plex Sans.
+    Permitted by the Qiskit Fall Fest branding rules (usable unmodified on
+    event material, with prior approval from event staff).
+    The standalone 8-bar IBM logo is deliberately NOT reproduced here — that
+    mark requires a contract.
+
+    NOTE: this renders as live text, so IBM Plex Sans must be available.
+    On the website it is (the pages load IBM Plex from Google Fonts). For
+    print or a partner deck, convert the text to outlines first, or ask
+    Fall Fest staff for the official asset file.
+  -->
+  <text x="0" y="41"
+        font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"
+        font-size="44" font-weight="400" letter-spacing="-0.5"
+        fill="currentColor">IBM</text>
+  <text x="86" y="41"
+        font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"
+        font-size="44" font-weight="700" letter-spacing="-1"
+        fill="currentColor">Quantum</text>
+</svg>

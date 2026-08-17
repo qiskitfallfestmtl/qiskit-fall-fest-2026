@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pkeyela.github.io/qiskit-fall-fest-2026/sitemap.xml

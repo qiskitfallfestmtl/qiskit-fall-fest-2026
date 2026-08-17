@@ -1,0 +1,165 @@
+/* =========================================================================
+   Qiskit Fall Fest 2026 — Polytechnique Montréal
+   Design tokens.  Palette extracted directly from the official 2026
+   illustration set (IBM Carbon), so the site is continuous with the artwork.
+   ========================================================================= */
+
+:root {
+  /* ---- Brand ramp (from the official SVGs) ---------------------------- */
+  --ff-purple-90: #31135e;   /* primary — headings, hero type            */
+  --ff-purple-80: #451b83;
+  --ff-purple-70: #6929c4;
+  --ff-purple-60: #8b3ffc;   /* interactive purple                       */
+  --ff-purple-50: #a56eff;
+  --ff-purple-40: #be95ff;
+  --ff-purple-30: #d4bbff;
+
+  --ff-magenta-60: #ee5396;
+  --ff-pink-50:    #ff7eb6;  /* signature accent                         */
+  --ff-pink-40:    #ffafd2;
+  --ff-pink-30:    #f5abd8;
+
+  --ff-blue-60: #0f62fe;     /* IBM blue                                 */
+  --ff-blue-50: #4589ff;
+  --ff-peri-60: #9daede;
+  --ff-peri-40: #bdcdef;
+  --ff-peri-20: #dae5fc;     /* hero ground                              */
+
+  --ff-gray-90: #343a3f;
+  --ff-gray-50: #a8a8a8;
+  --ff-gray-20: #e0e0e0;
+  --ff-gray-10: #f4f4f4;
+  --ff-cool-10: #f2f4f8;
+  --ff-white:   #ffffff;
+
+  /* ---- Semantic (light) ------------------------------------------------ */
+  --bg:            var(--ff-white);
+  --bg-alt:        var(--ff-cool-10);
+  --bg-sunken:     var(--ff-peri-20);
+  --bg-inverse:    var(--ff-purple-90);
+  --surface:       var(--ff-white);
+  --surface-hover: var(--ff-gray-10);
+
+  --text:          var(--ff-purple-90);
+  --text-muted:    #5b5b6b;
+  --text-inverse:  var(--ff-white);
+  --text-on-accent:var(--ff-white);
+
+  --border:        var(--ff-gray-20);
+  --border-strong: var(--ff-peri-60);
+
+  --accent:        var(--ff-purple-60);
+  --accent-hover:  var(--ff-purple-70);
+  --accent-2:      var(--ff-magenta-60);
+  --accent-3:      var(--ff-blue-60);
+
+  --focus:         var(--ff-blue-60);
+
+  --day1:          var(--ff-purple-60);
+  --day2:          var(--ff-magenta-60);
+
+  /* ---- Type ------------------------------------------------------------ */
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  /* Fluid scale — clamp(min, preferred, max) */
+  --fs-xs:   0.78rem;
+  --fs-sm:   0.875rem;
+  --fs-base: 1rem;
+  --fs-md:   clamp(1.05rem, 0.99rem + 0.3vw, 1.2rem);
+  --fs-lg:   clamp(1.25rem, 1.1rem + 0.7vw, 1.6rem);
+  --fs-xl:   clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem);
+  --fs-2xl:  clamp(2rem, 1.5rem + 2.4vw, 3.2rem);
+  --fs-3xl:  clamp(2.5rem, 1.6rem + 4.2vw, 5rem);
+
+  --lh-tight: 1.12;
+  --lh-snug:  1.3;
+  --lh-body:  1.65;
+
+  /* ---- Space (4px base) ------------------------------------------------ */
+  --sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;  --sp-4: 1rem;
+  --sp-5: 1.5rem;   --sp-6: 2rem;     --sp-7: 3rem;     --sp-8: 4rem;
+  --sp-9: 6rem;     --sp-10: 8rem;
+
+  --section-y: clamp(3.5rem, 2rem + 6vw, 7rem);
+
+  /* ---- Shape & depth --------------------------------------------------- */
+  --r-sm: 4px;  --r-md: 8px;  --r-lg: 16px;  --r-xl: 24px;  --r-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(49, 19, 94, .06), 0 1px 3px rgba(49, 19, 94, .08);
+  --shadow-md: 0 4px 12px rgba(49, 19, 94, .08), 0 2px 4px rgba(49, 19, 94, .06);
+  --shadow-lg: 0 12px 32px rgba(49, 19, 94, .12), 0 4px 8px rgba(49, 19, 94, .06);
+
+  --maxw: 1200px;
+  --maxw-prose: 68ch;
+
+  --ease: cubic-bezier(.2, .7, .3, 1);
+  --dur: 220ms;
+
+  --header-h: 68px;
+}
+
+/* ---- Dark theme --------------------------------------------------------
+   Explicit choice wins; otherwise follow the OS.  Every token below is a
+   REDEFINITION of one declared above, so nothing is dark-only.            */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:            #16091f;
+    --bg-alt:        #1e0f2b;
+    --bg-sunken:     #241338;
+    --bg-inverse:    #0d0514;
+    --surface:       #22112f;
+    --surface-hover: #2d1740;
+
+    --text:          #f2ecff;
+    --text-muted:    #b6a8c9;
+    --text-inverse:  #16091f;
+
+    --border:        #3b2352;
+    --border-strong: var(--ff-purple-50);
+
+    --accent:        var(--ff-purple-50);
+    --accent-hover:  var(--ff-purple-40);
+    --accent-2:      var(--ff-pink-50);
+    --accent-3:      var(--ff-blue-50);
+
+    --focus:         var(--ff-pink-50);
+
+    --day1:          var(--ff-purple-50);
+    --day2:          var(--ff-pink-50);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, .45);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, .55);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:            #16091f;
+  --bg-alt:        #1e0f2b;
+  --bg-sunken:     #241338;
+  --bg-inverse:    #0d0514;
+  --surface:       #22112f;
+  --surface-hover: #2d1740;
+
+  --text:          #f2ecff;
+  --text-muted:    #b6a8c9;
+  --text-inverse:  #16091f;
+
+  --border:        #3b2352;
+  --border-strong: var(--ff-purple-50);
+
+  --accent:        var(--ff-purple-50);
+  --accent-hover:  var(--ff-purple-40);
+  --accent-2:      var(--ff-pink-50);
+  --accent-3:      var(--ff-blue-50);
+
+  --focus:         var(--ff-pink-50);
+
+  --day1:          var(--ff-purple-50);
+  --day2:          var(--ff-pink-50);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, .45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, .55);
+}

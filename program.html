@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programme — Qiskit Fall Fest 2026 Polytechnique Montréal</title>
+<meta name="description" content="Programme complet des deux journées du Qiskit Fall Fest 2026 à Polytechnique Montréal : conférences, atelier Qiskit et hackathon.">
+<link rel="canonical" href="https://pkeyela.github.io/qiskit-fall-fest-2026/program.html">
+<meta property="og:title" content="Programme — Qiskit Fall Fest 2026 Polytechnique Montréal">
+<meta property="og:description" content="Deux jours, de l'introduction à la démonstration. 25–26 novembre 2026.">
+<meta property="og:image" content="https://pkeyela.github.io/qiskit-fall-fest-2026/assets/img/og-image.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#31135e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <img class="page-hero__bg" src="assets/img/hero.svg" alt="" aria-hidden="true">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="prog.eyebrow"></p>
+      <h1 data-i18n="prog.title"></h1>
+      <p class="section__lede" data-i18n="prog.note"></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="cal" id="calendar-menu" style="margin-bottom:var(--sp-7)">
+        <button class="btn btn--ghost" id="calendar-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="calendar-list">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>
+          <span data-i18n="cal.btn"></span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="cal__list" id="calendar-list" hidden data-i18n-attr="aria-label:cal.aria">
+          <li><a class="cal__item" id="cal-google" href="#">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <span data-i18n="cal.google"></span></a></li>
+          <li><a class="cal__item" id="cal-outlook" href="#">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 8 9 5 9-5"/></svg>
+            <span data-i18n="cal.outlook"></span></a></li>
+          <li><a class="cal__item" id="cal-ics" href="#">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12M8 11l4 4 4-4M4 19h16"/></svg>
+            <span data-i18n="cal.ics"></span></a></li>
+        </ul>
+      </div>
+
+      <div class="days">
+        <div class="day day--1">
+          <h2 class="day__title" data-i18n="prog.day1"></h2>
+          <ul class="timeline" id="timeline-day1"></ul>
+        </div>
+        <div class="day day--2">
+          <h2 class="day__title" data-i18n="prog.day2"></h2>
+          <ul class="timeline" id="timeline-day2"></ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

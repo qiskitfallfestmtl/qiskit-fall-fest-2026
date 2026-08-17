@@ -49,7 +49,15 @@ main { flex: 1 0 auto; }
 }
 
 /* ---------- Layout ------------------------------------------------------ */
-.wrap { width: min(100% - 2.5rem, var(--maxw)); margin-inline: auto; }
+/* The single container every page uses. Uses max-width + padding rather than
+   a computed `width`, so a child that also sets `width: 100%` (the header did)
+   can no longer knock the container out of its bounds. */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
 .section { padding-block: var(--section-y); position: relative; }
 .section--alt { background: var(--bg-alt); }
 .section--sunken { background: var(--bg-sunken); }
@@ -105,7 +113,8 @@ main { flex: 1 0 auto; }
   transition: box-shadow var(--dur) var(--ease);
 }
 .header.is-stuck { box-shadow: var(--shadow-sm); }
-.header__inner { display: flex; align-items: center; gap: var(--sp-5); width: 100%; }
+/* No `width` here — .wrap owns the sizing. */
+.header__inner { display: flex; align-items: center; gap: var(--sp-5); }
 
 .brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; flex-shrink: 0; }
 /* The badge is a circular vector with transparent corners — no background,
@@ -116,11 +125,13 @@ main { flex: 1 0 auto; }
 .brand__s { font-size: 0.72rem; color: var(--text-muted); }
 .brand--footer { margin-bottom: var(--sp-4); }
 
-.nav { margin-left: auto; display: flex; align-items: center; gap: var(--sp-4); }
+.nav { margin-left: auto; display: flex; align-items: center; gap: var(--sp-3); }
 .nav__list { display: flex; align-items: center; gap: var(--sp-1); }
 .nav__tools { display: flex; align-items: center; gap: var(--sp-2); }
+/* Horizontal padding is deliberately tight: 8 nav items + brand + tools have to
+   fit the 1104px container. Widen it and the header overflows the gutter. */
 .nav__link {
-  display: block; padding: var(--sp-2) var(--sp-3);
+  display: block; padding: var(--sp-2) 0.625rem;
   font-size: 0.9rem; font-weight: 500; text-decoration: none;
   border-radius: var(--r-sm); color: var(--text-muted);
   transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
@@ -494,7 +505,10 @@ main { flex: 1 0 auto; }
 .ibmq__q   { font-weight: 700; letter-spacing: -.022em; }
 
 /* ---------- Mobile nav -------------------------------------------------- */
-@media (max-width: 1100px) {
+/* Switch to the drawer at 1200px, not lower: with the page gutter the header's
+   usable width is (viewport - 2*gutter), so the 8-item desktop nav stops
+   fitting well before the old 1100px threshold. */
+@media (max-width: 1200px) {
   .burger { display: grid; }
   .nav__list {
     position: fixed; inset: var(--header-h) 0 auto 0;
@@ -512,8 +526,33 @@ main { flex: 1 0 auto; }
   .nav__link[aria-current="page"]::after { display: none; }
   .nav__cta { display: none; }
 }
-@media (min-width: 1101px) { .nav__list { transform: none !important; } }
-@media (max-width: 420px) { .brand__s { display: none; } }
+@media (min-width: 1201px) { .nav__list { transform: none !important; } }
+/* Small phones: the brand + three tool buttons have to fit inside
+   (viewport - 2*gutter). Tighten both rather than let the header overflow. */
+@media (max-width: 430px) {
+  .brand__s { display: none; }
+  .brand__t { font-size: 0.85rem; }
+  .brand__mark { width: 32px; height: 32px; }
+  .brand { gap: var(--sp-2); }
+  .nav { gap: var(--sp-2); }
+  .nav__tools { gap: var(--sp-1); }
+  .header__inner { gap: var(--sp-3); }
+}
+@media (max-width: 380px) {
+  :root { --gutter: 1rem; }
+  .lang-btn { padding: var(--sp-2) var(--sp-2); }
+}
+/* Below ~340px the wordmark and the three tool buttons cannot both fit.
+   Drop the wordmark — the badge still links home. */
+@media (max-width: 340px) { .brand__t { display: none; } }
+
+/* Four countdown units at their default width need 344px; a 320px phone only
+   offers ~273px inside the gutter. Tighten the row rather than overflow. */
+@media (max-width: 400px) {
+  .countdown__units { gap: var(--sp-3); }
+  .cd-unit { min-width: 3.4rem; }
+  .countdown__inner { gap: var(--sp-4); }
+}
 
 /* ---------- Reveal ------------------------------------------------------ */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }

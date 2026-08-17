@@ -93,6 +93,10 @@
   --maxw: 1200px;
   --maxw-prose: 68ch;
 
+  /* Breathing room at the left and right edges of every page. Grows with the
+     viewport, so narrow windows stay usable and wide ones don't feel cramped. */
+  --gutter: clamp(1.25rem, 3.5vw, 3rem);
+
   --ease: cubic-bezier(.2, .7, .3, 1);
   --dur: 220ms;
 

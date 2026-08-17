@@ -159,7 +159,10 @@ main { flex: 1 0 auto; }
   position: relative;
   background: var(--hero-ground, var(--ff-peri-20));
   overflow: hidden; isolation: isolate;
-  padding-block: clamp(3.5rem, 2rem + 7vw, 7.5rem);
+  /* Tuned so the countdown peeks above the fold on a 1366x768 laptop and is
+     fully visible from 1440x900 up — a partially-visible next section is what
+     tells people the page continues. Don't grow this back. */
+  padding-block: clamp(2.5rem, 1.5rem + 4.5vw, 5rem);
 }
 .hero__bg {
   position: absolute; inset: 0; z-index: -3;

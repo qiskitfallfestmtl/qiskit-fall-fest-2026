@@ -1,7 +1,5 @@
 /* =========================================================================
    Shared header + footer, injected into every page.
-   Edit the markup ONCE here and all pages update — this is what replaces a
-   template engine on a no-build site.
    Depends on content.js. Must run before i18n.js applies translations.
    ========================================================================= */
 (function () {
@@ -16,11 +14,11 @@
   /* Which page are we on? */
   var here = location.pathname.split("/").pop() || "index.html";
 
-  /* ---------------------------------------------------------------------
+  /* 
      The IBM Quantum lockup, rebuilt as type.
      Branding rules: the "IBM Quantum" lockup MAY be used; the standalone
      8-bar IBM logo may NOT. Nothing here reproduces the 8-bar logo.
-     ------------------------------------------------------------------ */
+ */
   var IBM_QUANTUM_LOCKUP =
     '<a class="ibmq-link" href="https://quantum.cloud.ibm.com/" target="_blank" rel="noopener noreferrer">' +
       '<span class="ibmq" role="img" aria-label="IBM Quantum">' +
@@ -111,7 +109,9 @@
 
           "<div>" +
             '<p class="footer__h" data-i18n="foot.explore"></p>' +
-            '<ul class="footer__links">' + links + "</ul>" +
+            /* --split flows these into 2 columns of 4 rows; the heading above
+               stays aligned with the first column. */
+            '<ul class="footer__links footer__links--split">' + links + "</ul>" +
           "</div>" +
 
           "<div>" +
@@ -121,15 +121,22 @@
               '<li><a href="code-of-conduct.html" data-i18n="foot.coc"></a></li>' +
               '<li><a data-mailto data-mailto-text href="#"></a></li>' +
             "</ul>" +
-            '<p class="footer__h" style="margin-top:var(--sp-5)" data-i18n="foot.support"></p>' +
+          "</div>" +
+
+          /* Own column, so its heading sits on the same line as EXPLORE and
+             CONTACT with the lockup directly beneath it. */
+          "<div>" +
+            '<p class="footer__h" data-i18n="foot.support"></p>' +
             '<div class="ibmq-wrap">' + IBM_QUANTUM_LOCKUP + "</div>" +
           "</div>" +
         "</div>" +
 
         '<div class="footer__bot">' +
-          '<p data-i18n="foot.disclaim"></p>' +
-          '<p data-i18n="foot.credit"></p>' +
-          "<p>© <span data-year></span> Qiskit Fall Fest — Polytechnique Montréal.</p>" +
+          '<div class="footer__legal">' +
+            '<p data-i18n="foot.disclaim"></p>' +
+            '<p data-i18n="foot.credit"></p>' +
+          "</div>" +
+          '<p class="footer__copy">© <span data-year></span> Qiskit Fall Fest — Polytechnique Montréal.</p>' +
         "</div>" +
       "</div>" +
     "</footer>";

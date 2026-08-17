@@ -95,8 +95,8 @@
 
   /* Breathing room at the left and right edges of every page.
      Kept modest on purpose: a larger gutter eats the header's usable width and
-     forces the nav to be squeezed. 32px is the most this layout affords. */
-  --gutter: clamp(1rem, 2.5vw, 2rem);
+     forces the nav to be squeezed. 16px is the most this layout affords. */
+  --gutter: clamp(0.01rem, 2.5vw, 0.2rem);
 
   --ease: cubic-bezier(.2, .7, .3, 1);
   --dur: 220ms;

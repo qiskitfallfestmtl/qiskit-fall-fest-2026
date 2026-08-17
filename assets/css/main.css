@@ -465,17 +465,40 @@ main { flex: 1 0 auto; }
 .cta p { color: var(--ff-purple-30); margin-bottom: var(--sp-6); font-size: var(--fs-md); }
 
 /* ---------- Footer ------------------------------------------------------ */
-.footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding-block: var(--sp-7) var(--sp-6); font-size: var(--fs-sm); }
-.footer__top { display: grid; gap: var(--sp-6); grid-template-columns: 1fr; margin-bottom: var(--sp-6); }
-@media (min-width: 760px) { .footer__top { grid-template-columns: 1.5fr 1fr 1fr; gap: var(--sp-7); } }
+.footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding-block: var(--sp-6) var(--sp-5); font-size: var(--fs-sm); }
+.footer__top { display: grid; gap: var(--sp-5); grid-template-columns: 1fr; margin-bottom: var(--sp-5); }
+@media (min-width: 700px)  { .footer__top { grid-template-columns: 1fr 1fr; gap: var(--sp-6); } }
+/* Four columns so EXPLORE, CONTACT and WITH THE SUPPORT OF share one line. */
+@media (min-width: 1000px) { .footer__top { grid-template-columns: 1.3fr 1.25fr 0.85fr 0.85fr; gap: var(--sp-6); } }
 .footer__h { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-3); }
 .footer__tag { color: var(--text-muted); max-width: 34ch; }
 .footer a { color: var(--text-muted); text-decoration: none; transition: color var(--dur) var(--ease); }
 .footer a:hover { color: var(--accent); text-decoration: underline; }
 .footer .brand a, .footer .brand__t { color: var(--text); }
 .footer__links li { padding-block: var(--sp-1); }
-.footer__bot { border-top: 1px solid var(--border); padding-top: var(--sp-5); color: var(--text-muted); display: grid; gap: var(--sp-2); }
-.footer__bot p { font-size: var(--fs-xs); }
+
+/* EXPLORE: fill 4 rows, then start a second column. Halves the block's height
+   and keeps the heading aligned with the first column. */
+.footer__links--split {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  justify-content: start;
+  column-gap: var(--sp-6);
+}
+
+/* Compact single-line ending: legal notices left, copyright right. */
+.footer__bot {
+  border-top: 1px solid var(--border); padding-top: var(--sp-4);
+  color: var(--text-muted);
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: var(--sp-2) var(--sp-4);
+}
+.footer__legal { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
+/* Slightly below --fs-xs: the French legal strings need 1243px at 12.5px and
+   only 1194px is available. Shrinking the fine print keeps the full wording. */
+.footer__bot p { font-size: 0.72rem; line-height: 1.5; }
+.footer__copy { margin-left: auto; text-align: right; }
 .socials { display: flex; gap: var(--sp-3); margin-top: var(--sp-4); }
 .socials a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--border); }
 .socials a:hover { border-color: var(--accent); color: var(--accent); }

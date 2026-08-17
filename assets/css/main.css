@@ -270,7 +270,9 @@ main { flex: 1 0 auto; }
 .about__grid { display: grid; gap: var(--sp-7); grid-template-columns: 1fr; }
 @media (min-width: 900px) { .about__grid { grid-template-columns: 1.05fr .95fr; gap: var(--sp-8); } }
 .about__body p + p { margin-top: var(--sp-4); }
-.about__body p { font-size: var(--fs-md); color: var(--text-muted); }
+/* Capped so widening the container never stretches paragraphs past a
+   comfortable line length. */
+.about__body p { font-size: var(--fs-md); color: var(--text-muted); max-width: var(--maxw-prose); }
 
 .outcomes { display: grid; gap: var(--sp-4); }
 .outcome {
@@ -526,10 +528,10 @@ main { flex: 1 0 auto; }
 .ibmq__q   { font-weight: 700; letter-spacing: -.022em; }
 
 /* ---------- Mobile nav -------------------------------------------------- */
-/* Switch to the drawer at 1200px, not lower: with the page gutter the header's
-   usable width is (viewport - 2*gutter), so the 8-item desktop nav stops
-   fitting well before the old 1100px threshold. */
-@media (max-width: 1200px) {
+/* Drawer below 1300px. The container is fluid (93vw), so the header's usable
+   width is 0.93*viewport - 2*gutter. The 8-item nav needs 1112px, which is
+   only reached around 1250px; 1300px leaves ~45px of real headroom. */
+@media (max-width: 1299px) {
   .burger { display: grid; }
   .nav__list {
     position: fixed; inset: var(--header-h) 0 auto 0;
@@ -547,7 +549,7 @@ main { flex: 1 0 auto; }
   .nav__link[aria-current="page"]::after { display: none; }
   .nav__cta { display: none; }
 }
-@media (min-width: 1201px) { .nav__list { transform: none !important; } }
+@media (min-width: 1300px) { .nav__list { transform: none !important; } }
 /* Small phones: the brand + three tool buttons have to fit inside
    (viewport - 2*gutter). */
 @media (max-width: 420px) {

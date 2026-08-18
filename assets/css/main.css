@@ -370,7 +370,10 @@ main { flex: 1 0 auto; }
 .ticks li { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); padding-block: var(--sp-2); font-size: var(--fs-sm); }
 .ticks svg { color: var(--accent-2); margin-top: .35rem; }
 
-.criteria { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+/* Fixed 2 columns so the four criteria read as a 2x2 block instead of
+   auto-fitting to 3 + 1 orphan in a wide card. */
+.criteria { display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 460px) { .criteria { grid-template-columns: 1fr; } }
 .crit { padding: var(--sp-4); border-radius: var(--r-md); background: var(--bg-alt); border: 1px solid var(--border); }
 .crit__t { font-size: var(--fs-sm); font-weight: 700; margin-bottom: var(--sp-1); }
 .crit__d { font-size: var(--fs-xs); color: var(--text-muted); }

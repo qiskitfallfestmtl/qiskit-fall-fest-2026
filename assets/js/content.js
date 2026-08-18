@@ -21,7 +21,7 @@ const SITE = {
     region: "QC",
     postal: "H3T 1J4",
     country: "CA",
-    room:   "GALERIE ROLLAND, B-600.16",
+    room:   "Galérie Rolland, B-600.16",
     mapsUrl: "https://maps.google.com/?q=Polytechnique+Montreal,+2500+chemin+de+Polytechnique,+Montreal,+QC+H3T+1J4"
   },
 
@@ -95,29 +95,29 @@ const I18N = {
 
   /* ---- About (home) ---- */
   "about.eyebrow": { fr: "L'événement", en: "About" },
-  "about.title":   { fr: "Une célébration mondiale du quantique, à Montréal",
-                     en: "A global quantum event, hosted in Montréal" },
+  "about.title":   { fr: "Une célébration du quantique à Montréal",
+                     en: "A global quantum event hosted in Montréal" },
   "about.p1": {
-    fr: "Le Qiskit Fall Fest est une série mondiale d'événements en informatique quantique organisés par des communautés étudiantes avec le soutien d'IBM Quantum. Chaque édition est conçue localement — et celle-ci est la nôtre.",
-    en: "Qiskit Fall Fest is a worldwide series of quantum computing events run by student communities with the support of IBM Quantum. Every edition is shaped locally — and this one is ours."
+    fr: "Le Qiskit Fall Fest est une série mondiale d'événements en informatique quantique organisés par des communautés étudiantes avec le soutien d'IBM Quantum.",
+    en: "Qiskit Fall Fest is a worldwide series of quantum computing events run by student communities with the support of IBM Quantum."
   },
   "about.p2": {
-    fr: "L'édition 2026 souligne dix ans d'informatique quantique dans le nuage : une décennie depuis qu'IBM a rendu un ordinateur quantique accessible à tous, en ligne. Pendant deux jours à Polytechnique Montréal, nous retraçons ce chemin — des premières démonstrations aux charges de travail de plus de 100 qubits d'aujourd'hui — puis nous vous mettons au clavier.",
+    fr: "L'édition 2026 souligne dix ans d'informatique quantique dans le nuage : une décennie depuis qu'IBM a rendu un ordinateur quantique accessible à tous en ligne. Pendant deux jours à Polytechnique Montréal, nous retraçons ce chemin — des premières démonstrations aux charges de travail de plus de 100 qubits d'aujourd'hui — puis nous vous mettrons au clavier.",
     en: "The 2026 edition marks ten years of quantum on the cloud: a decade since IBM put a quantum computer within reach of anyone with a browser. Over two days at Polytechnique Montréal we trace that arc — from the earliest demonstrations to today's 100+ qubit workloads — and then put you at the keyboard."
   },
   "about.outcomes.title": { fr: "Ce que vous en retirerez", en: "What you'll walk away with" },
   "about.o1.t": { fr: "Écrire votre premier circuit quantique", en: "Write your first quantum circuit" },
-  "about.o1.d": { fr: "Un atelier guidé de 90 minutes en Python et Qiskit, du bloc-notes vide au circuit qui tourne.",
-                  en: "A guided 90-minute workshop in Python and Qiskit, from empty notebook to a circuit that runs." },
+  "about.o1.d": { fr: "Un atelier guidé de 90 minutes en Python et Qiskit",
+                  en: "A guided 90-minute workshop in Python and Qiskit" },
   "about.o2.t": { fr: "Résoudre un vrai défi en équipe", en: "Solve a real challenge as a team" },
-  "about.o2.d": { fr: "Un hackathon d'une journée complète sur des énoncés dévoilés le matin même, avec du mentorat sur place.",
-                  en: "A full-day hackathon on prompts revealed that morning, with mentors on the floor." },
+  "about.o2.d": { fr: "Un hackathon d'une journée complète avec du mentorat sur place.",
+                  en: "A full-day hackathon on prompts with mentors on the floor." },
   "about.o3.t": { fr: "Rencontrer la communauté quantique d'ici", en: "Meet the quantum community here" },
-  "about.o3.d": { fr: "Chercheurs, personnel d'IBM Quantum, étudiants des cycles supérieurs et recruteurs, dans la même salle.",
-                  en: "Researchers, IBM Quantum staff, graduate students and recruiters, all in one room." },
+  "about.o3.d": { fr: "Chercheurs, personnel d'IBM Quantum, étudiants, dans la même salle.",
+                  en: "Researchers, IBM Quantum staff, students, all in one room." },
   "about.o4.t": { fr: "Repartir avec quelque chose à montrer", en: "Leave with something to show" },
-  "about.o4.d": { fr: "Un projet présenté devant jury, une attestation de participation et les autocollants officiels.",
-                  en: "A project pitched to judges, a certificate of participation, and the official stickers." },
+  "about.o4.d": { fr: "Un projet, une attestation de participation et les autocollants officiels.",
+                  en: "A project, a certificate of participation, and the official stickers." },
 
   /* ---- Program page ---- */
   "prog.eyebrow": { fr: "Programme", en: "Program" },
@@ -141,8 +141,8 @@ const I18N = {
   "hack.title":   { fr: "Une journée. Un énoncé. Votre équipe.",
                     en: "One day. One prompt. Your team." },
   "hack.lede": {
-    fr: "Les défis sont dévoilés le jeudi matin à 9 h — personne ne les connaît d'avance. Vous formez votre équipe le mercredi après-midi, vous codez toute la journée du jeudi, et vous présentez devant jury à 16 h.",
-    en: "Challenges are revealed at 9:00 on Thursday morning — nobody sees them in advance. You form your team on Wednesday afternoon, code all day Thursday, and pitch to the judges at 16:00."
+    fr: "Les défis sont dévoilés le jeudi matin à 9 h. Vous formez votre équipe le mercredi après-midi, vous codez toute la journée du jeudi, et vous présentez devant jury à 16 h.",
+    en: "Challenges are revealed at 9:00 on Thursday morning. You form your team on Wednesday afternoon, code all day Thursday, and pitch to the judges at 4pm."
   },
   "hack.rules.title": { fr: "Le format", en: "The format" },
   "hack.r1": { fr: "Équipes de 3 à 5 personnes, formées sur place le jour 1.", en: "Teams of 3–5, formed on site on Day 1." },

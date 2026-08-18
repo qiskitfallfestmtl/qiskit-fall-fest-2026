@@ -43,9 +43,7 @@
     $$("[data-mailto]").forEach(function (a) {
       if (!SITE.email) { a.removeAttribute("href"); return; }
       a.href = "mailto:" + SITE.email;
-      // ONLY write the address into links that asked for it. Icon-only links
-      // (the footer envelope) hold an <svg> and must keep it — writing
-      // textContent there would wipe the icon out.
+      
       if (a.hasAttribute("data-mailto-text")) a.textContent = SITE.email;
     });
     $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

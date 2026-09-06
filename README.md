@@ -56,8 +56,8 @@ To add or remove a page from the menu, edit the `NAV` array near the top of
 | Field | Status | What to do |
 |---|---|---|
 | `registrationUrl` | ⚠️ set | We have to design a proper registration form. |
-| `email` | ⚠️ **placeholder** | `qiskitfallfest@polymtl.ca` is place holder email. |
-| `venue.room` | ⚠️ Gallerie Roland | Added it waiting the confirmation. |
+| `email` | ✅ set | `qiskitfallfest.montreal@gmail.com` |
+| `venue.room` | ✅ Gallerie Roland | Confirmed. |
 | `url` | ⚠️ **placeholder** | We can buy a domain (CAD$20) or use github pages |
 
 `SITE.linkedin`, `SITE.instagram` and `SITE.github` are empty. we fill any of them

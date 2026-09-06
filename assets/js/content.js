@@ -2,9 +2,9 @@
 
 const SITE = {
   // The registration form. Every "Register" button on the site points here.
-  registrationUrl: "https://forms.cloud.microsoft/r/QdkYAQSThv",
+  registrationUrl: "https://forms.cloud.microsoft/r/iCi62SmCpb",
 
-  email:     "qiskitfallfest@polymtl.ca",
+  email:     "qiskitfallfest.montreal@gmail.com",
   linkedin:  "https://www.linkedin.com/feed/update/urn:li:activity:7490436894841974785/",
   instagram: "",
   github:    "",
@@ -338,10 +338,10 @@ const SPEAKERS = [
    6. ORGANIZING TEAM  — 4 slots
    ---------------------------------------------------------------------- */
 const TEAM = [
-  { name: "Wissal Hamhoum", photo: "", role: { fr: "Chef d'équipe", en: "Lead Organizer" }, link: "https://www.linkedin.com/in/wissal-hamhoum-3b7aa7197/" },
-  { name: "Melek Krichen", photo: "", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/melek-krichen-8856521b9/" },
-  { name: "Patatchona Keyela", photo: "", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/pkeyela/" },
-  { name: "Samar Abdelghani", photo: "", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/samar-abdelghani-1954a0133/" }
+  { name: "Wissal Hamhoum", photo: "assets/img/organizers/wissal.jpg", role: { fr: "Chef d'équipe", en: "Lead Organizer" }, link: "https://www.linkedin.com/in/wissal-hamhoum-3b7aa7197/" },
+  { name: "Melek Krichen", photo: "assets/img/organizers/melek.jpg", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/melek-krichen-8856521b9/" },
+  { name: "Patatchona Keyela", photo: "assets/img/organizers/keyela.jpg", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/pkeyela/" },
+  { name: "Samar Abdelghani", photo: "assets/img/organizers/samar.jpg", role: { fr: "Co-Organisateur", en: "Co-Organizer" }, link: "https://www.linkedin.com/in/samar-abdelghani-1954a0133/" }
 ];
 
 /* Shown when a person has no name yet. */

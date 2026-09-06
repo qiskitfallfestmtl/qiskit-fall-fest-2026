@@ -21,9 +21,7 @@
  */
   var IBM_QUANTUM_LOCKUP =
     '<a class="ibmq-link" href="https://quantum.cloud.ibm.com/" target="_blank" rel="noopener noreferrer">' +
-      '<span class="ibmq" role="img" aria-label="IBM Quantum">' +
-        '<span class="ibmq__ibm">IBM</span><span class="ibmq__q">Quantum</span>' +
-      "</span>" +
+      '<img class="ibmq" data-ibm-quantum-logo src="assets/img/IBM_Quantum_logotype_pos_RGB.png" alt="IBM Quantum" width="180" height="34" loading="lazy">' +
     "</a>";
 
   /* ---------------------------------------------------------------------
@@ -45,7 +43,7 @@
           '<img class="brand__mark" src="assets/img/badge.svg" alt="" width="38" height="38">' +
           '<span class="brand__txt">' +
             '<span class="brand__t">Qiskit Fall Fest 2026</span>' +
-            '<span class="brand__s">Polytechnique Montréal</span>' +
+            '<span class="brand__s">at Polytechnique Montréal</span>' +
           "</span>" +
         "</a>" +
         '<nav class="nav" aria-label="Navigation principale">' +
@@ -93,7 +91,7 @@
               '<img class="brand__mark" src="assets/img/badge.svg" alt="" width="38" height="38">' +
               '<span class="brand__txt">' +
                 '<span class="brand__t">Qiskit Fall Fest 2026</span>' +
-                '<span class="brand__s">Polytechnique Montréal</span>' +
+                '<span class="brand__s">at Polytechnique Montréal</span>' +
               "</span>" +
             "</a>" +
             '<p class="footer__tag" data-i18n="foot.tag"></p>' +
@@ -136,7 +134,7 @@
             '<p data-i18n="foot.disclaim"></p>' +
             '<p data-i18n="foot.credit"></p>' +
           "</div>" +
-          '<p class="footer__copy">© <span data-year></span> Qiskit Fall Fest — Polytechnique Montréal.</p>' +
+          '<p class="footer__copy">© <span data-year></span> Qiskit Fall Fest at Polytechnique Montréal.</p>' +
         "</div>" +
       "</div>" +
     "</footer>";

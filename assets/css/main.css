@@ -387,6 +387,7 @@ main { flex: 1 0 auto; }
 
 /* ---------- People ------------------------------------------------------ */
 .people { display: grid; gap: var(--sp-5); grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+#team-list { grid-template-columns: repeat(auto-fit, minmax(180px, 220px)); justify-content: center; }
 .person { text-align: center; }
 .person__link { text-decoration: none; display: block; }
 .person__media {
@@ -520,15 +521,15 @@ main { flex: 1 0 auto; }
 }
 .ibmq-link:hover { opacity: .7; text-decoration: none; }
 .ibmq {
-  display: inline-flex; align-items: baseline; gap: .28em;
-  font-family: var(--font-sans);
-  font-size: 1.45rem; line-height: 1; color: var(--text);
-  white-space: nowrap;
+  display: block;
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  color: var(--text);
 }
 /* The footer's generic link colour must not win over the lockup. */
 .footer .ibmq-link, .footer .ibmq-link:hover { color: var(--text); }
-.ibmq__ibm { font-weight: 400; letter-spacing: -.012em; }
-.ibmq__q   { font-weight: 700; letter-spacing: -.022em; }
 
 /* ---------- Mobile nav -------------------------------------------------- */
 /* Drawer below 1300px. The container is fluid (93vw), so the header's usable

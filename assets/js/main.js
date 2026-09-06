@@ -21,9 +21,17 @@
      THEME
      ------------------------------------------------------------------ */
   var THEME_KEY = "qff26.theme";
+  function updateIBMQuantumLogo() {
+    var img = document.querySelector("[data-ibm-quantum-logo]");
+    if (!img) return;
+    img.src = currentTheme() === "dark"
+      ? "assets/img/IBM_Quantum_logotype_rev_RGB.png"
+      : "assets/img/IBM_Quantum_logotype_pos_RGB.png";
+  }
   function applyTheme(mode) {
     if (mode === "light" || mode === "dark") document.documentElement.setAttribute("data-theme", mode);
     else document.documentElement.removeAttribute("data-theme");
+    updateIBMQuantumLogo();
   }
   function currentTheme() {
     return document.documentElement.getAttribute("data-theme") ||
@@ -340,6 +348,7 @@
     document.documentElement.lang = window.I18n.lang;
     window.I18n.setLang(window.I18n.lang, renderDynamic);
 
+    updateIBMQuantumLogo();
     wireLinks();
     initCountdown();
     initCalendar();

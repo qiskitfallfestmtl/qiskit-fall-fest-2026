@@ -9,7 +9,7 @@ const SITE = {
   instagram: "",
   github:    "",
 
-  url: "https://pkeyela.github.io/qiskit-fall-fest-2026/",
+  url: "https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/",
 
   startISO: "2026-11-25T08:30:00-05:00",
   endISO:   "2026-11-26T18:00:00-05:00",

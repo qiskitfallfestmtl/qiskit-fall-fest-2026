@@ -55,10 +55,10 @@ To add or remove a page from the menu, edit the `NAV` array near the top of
 
 | Field | Status | What to do |
 |---|---|---|
-| `registrationUrl` | ⚠️ set | We have to design a proper registration form. |
+| `registrationUrl` | ✅ set | Done. |
 | `email` | ✅ set | `qiskitfallfest.montreal@gmail.com` |
 | `venue.room` | ✅ Gallerie Roland | Confirmed. |
-| `url` | ⚠️ **placeholder** | We can buy a domain (CAD$20) or use github pages |
+| `url` | ✅ set | `https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/` |
 
 `SITE.linkedin`, `SITE.instagram` and `SITE.github` are empty. we fill any of them
 in and the matching icon **appears automatically** in the footer; if left empty no broken icon shows.
@@ -185,7 +185,7 @@ Then: **Settings → Pages → Source: `main` / root**.
 
 ### Custom Domain
 
-Replace `https://pkeyela.github.io/qiskit-fall-fest-2026/` everywhere:
+Replace `https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/` everywhere:
 
 - every `.html` file (canonical link + Open Graph tags; `index.html` also has JSON-LD)
 - `sitemap.xml`

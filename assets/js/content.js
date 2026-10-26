@@ -11,8 +11,8 @@ const SITE = {
 
   url: "https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/",
 
-  startISO: "2026-11-25T08:30:00-05:00",
-  endISO:   "2026-11-26T18:00:00-05:00",
+  startISO: "2026-11-25T08:00:00-05:00",
+  endISO:   "2026-11-26T17:45:00-05:00",
 
   venue: {
     name:   "Polytechnique Montréal",
@@ -87,7 +87,7 @@ const I18N = {
   "facts.days.v":  { fr: "2 jours",  en: "2 days" },
   "facts.days.l":  { fr: "25 – 26 novembre", en: "25 – 26 November" },
   "facts.cost.v":  { fr: "Gratuit", en: "Free" },
-  "facts.cost.l":  { fr: "Repas inclus", en: "Meals included" },
+  "facts.cost.l":  { fr: "Café inclus", en: "Coffee included" },
   "facts.level.v": { fr: "Débutants bienvenus", en: "Beginners welcome" },
   "facts.level.l": { fr: "Aucun prérequis quantique", en: "No quantum background needed" },
   "facts.place.v": { fr: "En personne", en: "In person" },
@@ -248,68 +248,74 @@ const I18N = {
 
 /* -------------------------------------------------------------------------
    4. PROGRAM
-   `type` drives the colour coding: ceremony | talk | workshop | break |
-   networking | panel | hackathon | judging
+   `type` drives the colour coding: welcome | ceremony | talk | workshop |
+   break | networking | panel | hackathon | judging
    Set `tbc: true` on any row whose timing is not yet locked.
    ---------------------------------------------------------------------- */
 const PROGRAM = {
   day1: [
-    { start: "08:30", end: "08:45", type: "break",
+    { start: "08:00", end: "08:45", type: "welcome",
       t: { fr: "Accueil et café", en: "Registration & coffee" },
       d: { fr: "Inscription sur place et mot de bienvenue.", en: "Check-in and welcome." } },
     { start: "08:45", end: "09:15", type: "ceremony",
       t: { fr: "Cérémonie d'ouverture", en: "Opening ceremony" },
-      d: { fr: "", en: "" } },
+      d: { fr: "Pr Soumaya Cherkaoui.", en: "Prof. Soumaya Cherkaoui." } },
     { start: "09:15", end: "09:45", type: "talk",
-      t: { fr: "Conférence 1 — L'informatique quantique : une histoire", en: "Talk 1 — Quantum computing: a history" },
-      d: { fr: "Présentée par IBM.", en: "Delivered by IBM." } },
-    { start: "09:45", end: "10:15", type: "talk",
-      t: { fr: "Conférence 2 — Applications et avantages potentiels", en: "Talk 2 — Potential applications and advantages" },
-      d: { fr: "Où l'informatique quantique change réellement la donne.", en: "Where quantum computing actually moves the needle." } },
-    { start: "10:15", end: "11:45", type: "workshop",
-      t: { fr: "Atelier d'introduction — Qiskit en pratique", en: "Introductory workshop — hands-on Qiskit" },
-      d: { fr: "Session interactive : courte démonstration guidée, puis vous codez.", en: "Interactive session: a short guided tutorial, then you code." } },
+      t: { fr: "Conférence 1 — IBM", en: "Talk 1 — IBM" },
+      d: { fr: "Conférencier à confirmer.", en: "Speaker to be confirmed." } },
+    { start: "09:45", end: "10:45", type: "workshop",
+      t: { fr: "Atelier Qiskit", en: "Qiskit workshop" },
+      d: { fr: "Animateur à confirmer.", en: "Speaker to be confirmed." } },
+    { start: "10:45", end: "11:15", type: "talk",
+      t: { fr: "Conférence 2 — Commanditaire", en: "Talk 2 — Sponsor" },
+      d: { fr: "Sujet et conférencier à confirmer.", en: "Topic and speaker to be confirmed." } },
+    { start: "11:15", end: "11:45", type: "talk",
+      t: { fr: "Conférence 3 — Quandela", en: "Talk 3 — Quandela" },
+      d: { fr: "Présentée par l'équipe Quandela. Sujet à confirmer.", en: "Delivered by the Quandela team. Topic to be confirmed." } },
     { start: "11:45", end: "12:45", type: "break",
-      t: { fr: "Pause dîner", en: "Lunch break" }, d: { fr: "", en: "" } },
-    { start: "12:45", end: "13:15", type: "talk",
-      t: { fr: "Ma recherche en 3 minutes", en: "My research in 3 minutes" },
+      t: { fr: "Pause dîner", en: "Lunch break" },
+      d: { fr: "Dîner fourni à confirmer — prévoyez votre lunch au cas où.", en: "Lunch provided — to be confirmed. Bring your own just in case." } },
+    { start: "12:45", end: "13:45", type: "workshop",
+      t: { fr: "Atelier Merlin", en: "Merlin workshop" },
+      d: { fr: "Animateur à confirmer.", en: "Speaker to be confirmed." } },
+    { start: "13:45", end: "14:15", type: "talk",
+      t: { fr: "Ma recherche quantique en 3 minutes", en: "My quantum research in 3 minutes" },
       d: { fr: "Étudiants des cycles supérieurs et chercheurs présentent leur sujet, chronomètre en main.",
            en: "Graduate students and researchers pitch their topic against the clock." } },
-    { start: "13:20", end: "14:20", type: "panel",
-      t: { fr: "Table ronde — Au-delà du battage quantique", en: "Panel — Beyond the quantum hype" },
-      d: { fr: "Le quantique dans le monde réel et les carrières · Après le diplôme : recherche ou industrie ?",
-           en: "Quantum in the real world and careers · After graduation: research or industry?" } },
-    { start: "14:25", end: "15:25", type: "networking",
+    { start: "14:15", end: "15:30", type: "panel",
+      t: { fr: "Table ronde", en: "Panel discussion" },
+      d: { fr: "Panélistes à confirmer.", en: "Panelists to be confirmed." } },
+    { start: "15:30", end: "16:30", type: "networking",
       t: { fr: "Formation des équipes et réseautage", en: "Team formation & networking" },
-      d: { fr: "Trouvez vos coéquipiers pour le hackathon du lendemain.", en: "Find your teammates for tomorrow's hackathon." } },
-    { start: "15:30", end: "16:30", type: "workshop", tbc: true,
-      t: { fr: "Dévoilement des règles et installation", en: "Rules reveal & environment setup" },
-      d: { fr: "Règles, critères d'évaluation et thèmes des défis. Installation de Python et Qiskit en vue du jour 2.",
-           en: "Rules, evaluation criteria and challenge themes. Set up Python and Qiskit ahead of Day 2." } }
+      d: { fr: "Trouvez vos coéquipiers pour le hackathon du lendemain.", en: "Find your teammates for tomorrow's hackathon." } }
   ],
   day2: [
-    { start: "08:30", end: "09:00", type: "break",
+    { start: "08:00", end: "08:45", type: "welcome",
       t: { fr: "Accueil et café", en: "Registration & coffee" }, d: { fr: "", en: "" } },
-    { start: "09:00", end: "09:30", type: "ceremony",
-      t: { fr: "Dévoilement des énoncés", en: "Revealing the prompts" },
-      d: { fr: "Les défis sont rendus publics. Le chronomètre démarre.", en: "The challenges go public. The clock starts." } },
-    { start: "09:30", end: "12:00", type: "hackathon",
+    { start: "08:45", end: "09:15", type: "ceremony",
+      t: { fr: "Dévoilement des énoncés et des règles", en: "Prompts reveal & rules" },
+      d: { fr: "Les défis et les critères d'évaluation sont rendus publics. Le chronomètre démarre.",
+           en: "The challenges and evaluation criteria go public. The clock starts." } },
+    { start: "09:15", end: "11:45", type: "hackathon",
       t: { fr: "Hackathon — première manche", en: "Hackathon — first stretch" },
       d: { fr: "Mentors sur place.", en: "Mentors on the floor." } },
-    { start: "12:00", end: "13:00", type: "break",
-      t: { fr: "Pause dîner", en: "Lunch break" }, d: { fr: "", en: "" } },
-    { start: "13:00", end: "16:00", type: "hackathon",
+    { start: "11:45", end: "12:45", type: "break",
+      t: { fr: "Pause dîner", en: "Lunch break" },
+      d: { fr: "Dîner fourni à confirmer — prévoyez votre lunch au cas où.", en: "Lunch provided — to be confirmed. Bring your own just in case." } },
+    { start: "12:45", end: "15:45", type: "hackathon",
       t: { fr: "Hackathon — dernière ligne droite", en: "Hackathon — final stretch" },
       d: { fr: "Trois heures pour finir et préparer la présentation.", en: "Three hours to finish and prepare the pitch." } },
-    { start: "16:00", end: "17:30", type: "judging",
+    { start: "15:45", end: "17:15", type: "judging",
       t: { fr: "Présentations et évaluation", en: "Pitching & judging" },
-      d: { fr: "Chaque équipe présente devant le jury.", en: "Each team pitches to the judges." } },
-    { start: "17:30", end: "18:00", type: "ceremony",
+      d: { fr: "Chaque équipe présente devant le jury. Jury : Pr Soumaya Cherkaoui et autres membres à confirmer.",
+           en: "Each team pitches to the judges. Jury: Prof. Soumaya Cherkaoui, other members to be confirmed." } },
+    { start: "17:15", end: "17:45", type: "ceremony",
       t: { fr: "Cérémonie de clôture et remise des prix", en: "Closing ceremony & awards" }, d: { fr: "", en: "" } }
   ]
 };
 
 const TYPE_LABEL = {
+  welcome:    { fr: "Arrivée",    en: "Welcome" },
   ceremony:   { fr: "Cérémonie",  en: "Ceremony" },
   talk:       { fr: "Conférence", en: "Talk" },
   workshop:   { fr: "Atelier",    en: "Workshop" },
@@ -376,8 +382,8 @@ const FAQ = [
   },
   {
     q: { fr: "Combien ça coûte ?", en: "How much does it cost?" },
-    a: { fr: "Rien. L'inscription, les repas et le café sont offerts grâce à nos partenaires.",
-         en: "Nothing. Registration, meals and coffee are covered by our partners." }
+    a: { fr: "Rien. L'inscription et le café sont offerts grâce à nos partenaires. Le dîner reste à confirmer ; nous l'annoncerons avant l'événement.",
+         en: "Nothing. Registration and coffee are covered by our partners. Lunch is still to be confirmed; we'll announce it before the event." }
   },
   {
     q: { fr: "Qu'est-ce que j'apporte ?", en: "What should I bring?" },

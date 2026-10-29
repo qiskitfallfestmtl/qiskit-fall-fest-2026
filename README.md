@@ -86,15 +86,20 @@ locked and it renders a visible "to be confirmed" tag.
 
 ### Partners
 
-`SPONSORS` is an empty array — the page shows a placeholder until you add
-entries. There are **no sponsorship tiers**; the page explains how to help and
-gives one button that emails the team.
+Partners are shown in categories. `PARTNER_GROUPS` in `content.js` sets the
+categories and their order; `SPONSORS` lists the partners. To add a partner,
+add one line with the `id` of its category:
 
 ```js
-const SPONSORS = [
-  { name: "Nom", logo: "assets/img/sponsors/nom.svg", url: "https://..." },
-];
+{ name: "Nom", group: "program", logo: "assets/img/partners/Program%20Contributors/nom.png", url: "https://..." },
 ```
+
+- Leave `logo: ""` and the partner's name is shown in the tile instead.
+- Tiles are white in both themes, so use the dark-on-light version of a logo.
+- To add a new category, add `{ id, title: { fr, en } }` to `PARTNER_GROUPS`
+  where it should appear. Categories with no partners are hidden.
+- Put logos in `assets/img/partners/<category>/`. In the path, write spaces
+  as `%20` and `&` as `%26`.
 
 ---
 
@@ -198,16 +203,16 @@ This controls the preview card shown when IBM Quantum shares the link on LinkedI
 
 ## 8. Launch checklist
 
-- [ ] Real contact email in `content.js`
-- [ ] Room / pavillon confirmed and added
+- [x] Real contact email in `content.js`
+- [x] Room / pavillon confirmed and added
 - [ ] `PROGRAM.day1`, last entry, `tbc: true`. Remove that flag once decided.
-- [ ] Registration form contains the required questions
+- [x] Registration form contains the required questions
 - [ ] IBM Quantum lockup approved by event staff
 - [ ] Speakers and judges filled in (6 slots)
-- [ ] Organizing committee filled in (4 slots)
+- [x] Organizing committee filled in (4 slots)
 - [ ] Partner logos added, or the placeholder left deliberately
 - [ ] Social links added to `SITE` if you have them
-- [ ] Final URL replaced everywhere
+- [x] Final URL replaced everywhere
 - [ ] Social card checked at <https://www.opengraph.xyz/>
 - [ ] Tested on a real phone
 

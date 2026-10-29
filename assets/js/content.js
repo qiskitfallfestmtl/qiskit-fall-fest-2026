@@ -198,6 +198,11 @@ const I18N = {
                      en: "The buildings are wheelchair accessible. Tell us about any specific needs in the registration form and we will make arrangements." },
   "venue.map":     { fr: "Ouvrir dans Google Maps", en: "Open in Google Maps" },
 
+  /* ---- Homepage partners band ---- */
+  "home.partners.more.p":   { fr: "IBM Quantum, Lincs Lab, Quandela, l'AMF et d'autres contribuent aussi à l'événement.",
+                              en: "IBM Quantum, Lincs Lab, Quandela, the AMF and others also make this event possible." },
+  "home.partners.more.cta": { fr: "Voir tous nos partenaires", en: "See all our partners" },
+
   /* ---- Partners page ---- */
   "spon.eyebrow": { fr: "Partenaires", en: "Partners" },
   "spon.title":   { fr: "Rendu possible par", en: "Made possible by" },
@@ -357,8 +362,27 @@ const PERSON_FALLBACK_IMG = "assets/img/speaker.png";
 /* -------------------------------------------------------------------------
    7. PARTNERS
    ---------------------------------------------------------------------- */
+/* Categories, in display order. A category with no partners is hidden.
+   size: "lg" shows that category's logos in bigger tiles. */
+const PARTNER_GROUPS = [
+  { id: "supporters", size: "lg", title: { fr: "Partenaires officiels",     en: "Official Partners" } },
+  { id: "mbp",     title: { fr: "Avec le soutien ",                   en: "With Support From" } },
+  { id: "tech",       title: { fr: "Partenaire technologique et Scientific", en: "Technology & Knowledge Partner" } },
+  { id: "program",    title: { fr: "Contributeurs au programme",            en: "Program Contributors" } }
+];
+
+/* group: an id from PARTNER_GROUPS.  logo: optional — without it the name is shown.
+   Tiles are white in both themes, so use the dark-on-light version of each logo.
+   Encode spaces as %20 and "&" as %26 in folder names. */
 const SPONSORS = [
-  // { name: "Nom", logo: "assets/img/sponsors/nom.svg", url: "https://..." },
+  { name: "AÉCSP",        group: "supporters", logo: "assets/img/partners/Event_Suporters/aecso.png", url: "" },
+  { name: "Quantacet",    group: "supporters", logo: "assets/img/partners/Event_Suporters/Quantacet-logo-vertical.png", url: "" },
+  { name: "IBM Quantum",  group: "mbp",     logo: "assets/img/IBM_Quantum_logotype_pos_RGB.png", url: "https://www.ibm.com/quantum" },
+  { name: "Lincs Lab",    group: "mbp",     logo: "assets/img/partners/MPb/lincs_lab.png", url: "https://lincslab.ca/en/" },
+
+  { name: "Quandela",     group: "tech",       logo: "assets/img/partners/Technology%20%26%20Knowledge%20Partner/Quandela.webp", url: "https://www.quandela.com" },
+  // { name: "Hydro-Québec", group: "program",    logo: "", url: "https://www.hydroquebec.com" },
+  { name: "Autorité des marchés financiers", group: "program", logo: "assets/img/partners/Program%20Contributors/AMF.webp", url: "https://lautorite.qc.ca" }
 ];
 
 /* -------------------------------------------------------------------------

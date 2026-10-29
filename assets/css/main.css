@@ -424,9 +424,37 @@ main { flex: 1 0 auto; }
 .map-embed { width: 100%; aspect-ratio: 4/3; border: 0; border-radius: var(--r-lg); box-shadow: var(--shadow-md); background: var(--bg-alt); }
 
 /* ---------- Partners ---------------------------------------------------- */
-.logos { display: flex; flex-wrap: wrap; gap: var(--sp-5); align-items: center; }
-.logos a, .logos div { display: grid; place-items: center; min-width: 150px; min-height: 74px; padding: var(--sp-4); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); }
-.logos img { max-height: 44px; width: auto; }
+/* Sizes — edit here.  The logo shrinks to fit inside its tile, minus the padding. */
+.logos {
+  --tile-w: 240px;  --tile-h: 130px;  --tile-pad: var(--sp-4);   /* normal categories */
+  --name-size: var(--fs-md);                                     /* name shown when there is no logo */
+}
+.logos--lg {
+  --tile-w: 420px;  --tile-h: 260px;  --tile-pad: var(--sp-5);   /* categories with size: "lg" */
+}
+
+.logos { display: flex; flex-wrap: wrap; gap: var(--sp-5); align-items: center; justify-content: center; }
+/* White in both themes: most partner logos are dark-on-light. */
+.logos a, .logos div {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--tile-w); max-width: 100%; height: var(--tile-h); padding: var(--tile-pad);
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-md);
+}
+.logos img { max-width: 100%; max-height: 100%; width: auto; height: auto; min-width: 0; object-fit: contain; }
+.logos__name { font-size: var(--name-size); font-weight: 700; color: #1a1a1a; text-align: center; }
+.logos a:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+
+.partners { display: grid; gap: var(--sp-8); }
+/* Homepage band: smaller tiles than the partners page. */
+.partners--home .logos--lg { --tile-w: 300px; --tile-h: 180px; --tile-pad: var(--sp-4); }
+.home-partners__more { margin-top: var(--sp-6); display: grid; justify-items: center; gap: var(--sp-4); text-align: center; color: var(--text-muted); }
+.home-partners__more p { max-width: 52ch; }
+.partner-group__t {
+  font-size: var(--fs-lg); font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; text-align: center;
+  color: var(--accent-2);
+  margin-bottom: var(--sp-4);
+}
 
 .tba {
   display: grid; place-items: center; gap: var(--sp-4);

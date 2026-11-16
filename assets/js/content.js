@@ -520,7 +520,7 @@ const PARTNER_GROUPS = [
   { id: "supporters", size: "lg", title: { fr: "Partenaires officiels",                en: "Official Partners" } },
   { id: "mbp",                    title: { fr: "Avec le soutien de",                   en: "With Support From" } },
   { id: "tech",                   title: { fr: "Partenaire technologique et scientifique", en: "Technology & Knowledge Partner" } },
-  { id: "program",                title: { fr: "Contributeurs au programme",            en: "Program Contributors" } }
+  { id: "program",    size: "sm", title: { fr: "Contributeurs au programme",            en: "Program Contributors" } }
 ];
 
 const SPONSORS = [

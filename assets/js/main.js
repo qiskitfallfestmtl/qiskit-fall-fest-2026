@@ -213,9 +213,10 @@
       if (only.length && only.indexOf(g.id) < 0) return "";
       var items = SPONSORS.filter(function (x) { return x.group === g.id; });
       if (!items.length) return "";
-      return '<div class="partner-group reveal">' +
+      var sizeClass = g.size ? " logos--" + g.size : "";
+      return '<div class="partner-group reveal" data-group="' + esc(g.id) + '">' +
         '<h2 class="partner-group__t">' + esc(pick(g.title)) + "</h2>" +
-        '<div class="logos' + (g.size === "lg" ? " logos--lg" : "") + '">' + items.map(tile).join("") + "</div></div>";
+        '<div class="logos' + sizeClass + '">' + items.map(tile).join("") + "</div></div>";
     }).join("");
   }
 

@@ -5,7 +5,7 @@ const SITE = {
   linkedin:  "https://www.linkedin.com/feed/update/urn:li:activity:7490436894841974785/",
   instagram: "",
   github:    "",
-  discord:   "https://discord.gg/G8FBKTcWGh",
+  discord:   "", //"https://discord.gg/G8FBKTcWGh",
 
   url: "https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/",
 

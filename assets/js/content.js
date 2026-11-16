@@ -5,7 +5,7 @@ const SITE = {
   linkedin:  "https://www.linkedin.com/feed/update/urn:li:activity:7490436894841974785/",
   instagram: "",
   github:    "",
-  discord:   "https://discord.gg/V7nZqX6D",
+  discord:   "https://discord.gg/G8FBKTcWGh",
 
   url: "https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/",
 
@@ -381,7 +381,7 @@ const SPEAKERS = [
     name: "Ning Ma",
     group: "talks",
     photo: "assets/img/speakers/ning-ma.png",
-    role: { fr: "Conférence 2 — PhD Candidate, Quandela", en: "Talk 2 — PhD Candidate Quandela" },
+    role: { fr: "Conférence 2 — PhD Candidate, Quandela", en: "Talk 2 — PhD Candidate, Quandela" },
     link: "https://www.linkedin.com/in/ning-ma-1a2003b2/"
   },
   {

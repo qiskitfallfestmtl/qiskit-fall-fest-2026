@@ -18,3 +18,11 @@ Desktop.ini
 Quantum StealthShield.pdf
 Quantum StealthShield.pptx
 *.zip
+
+# Attendee data & Discord scripts
+attendees.csv
+verify_bot.py
+setup_discord.py
+clean_discord.py
+__pycache__/
+*.pyc

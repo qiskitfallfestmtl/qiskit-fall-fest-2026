@@ -67,7 +67,8 @@
      FOOTER
      ------------------------------------------------------------------ */
   function footerHTML() {
-    var links = NAV.map(function (n) {
+    var footerNav = (typeof NAV_FOOTER !== "undefined" ? NAV_FOOTER : NAV);
+    var links = footerNav.map(function (n) {
       return '<li><a href="' + esc(n.href) + '" data-i18n="' + esc(n.key) + '"></a></li>';
     }).join("");
 

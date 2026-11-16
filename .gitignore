@@ -12,3 +12,9 @@ Desktop.ini
 
 # Local tooling
 .claude/
+
+# Challenge files and archives
+*.pptx
+Quantum StealthShield.pdf
+Quantum StealthShield.pptx
+*.zip

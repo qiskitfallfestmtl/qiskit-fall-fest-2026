@@ -1,7 +1,7 @@
 /* =========================================================================
    Qiskit Fall Fest 2026 — Polytechnique Montréal
-   App behaviour: nav, theme, countdown, program, people, calendar.
-   Depends on content.js + layout.js + i18n.js.  No build step, no deps.
+   App behaviour: nav, theme, countdown, program, people, partners, hackathon.
+   Depends on content.js + layout.js + i18n.js. No build step, no deps.
    ========================================================================= */
 (function () {
   "use strict";
@@ -43,15 +43,20 @@
      LINKS — one source of truth
      ------------------------------------------------------------------ */
   function wireLinks() {
+    var registerHref = (SITE.registrationClosed && SITE.discord) ? SITE.discord : SITE.registrationUrl;
     $$("[data-register]").forEach(function (a) {
-      a.href = SITE.registrationUrl;
+      a.href = registerHref;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    });
+    $$("[data-discord]").forEach(function (a) {
+      a.href = SITE.discord;
       a.target = "_blank";
       a.rel = "noopener noreferrer";
     });
     $$("[data-mailto]").forEach(function (a) {
       if (!SITE.email) { a.removeAttribute("href"); return; }
       a.href = "mailto:" + SITE.email;
-      
       if (a.hasAttribute("data-mailto-text")) a.textContent = SITE.email;
     });
     $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
@@ -134,28 +139,52 @@
   function personHTML(p) {
     var named = !!(p.name && p.name.trim());
     var name = named ? p.name : pick(PERSON_PLACEHOLDER);
-    var src = p.photo || PERSON_FALLBACK_IMG;
-    var isPlaceholder = !p.photo;
+    var hasPhoto = !!(p.photo && p.photo.trim());
 
-    // The placeholder is one small shared file sitting above the fold on the
-    // speakers/team pages — load it eagerly. Real photos stay lazy.
-    var loading = isPlaceholder ? "eager" : "lazy";
-    var media = '<div class="person__media' + (isPlaceholder ? " person__media--ph" : "") + '">' +
-        '<img src="' + esc(src) + '" alt="' + (named ? esc(p.name) : "") + '" loading="' + loading + '" decoding="async" width="300" height="300">' +
-      "</div>";
+    var media;
+    if (hasPhoto) {
+      media = '<div class="person__media">' +
+        '<img src="' + esc(p.photo) + '" alt="' + (named ? esc(p.name) : "") + '" loading="lazy" decoding="async" width="300" height="300">' +
+      '</div>';
+    } else {
+      // Circle avatar with human icon inside when photo is missing
+      media = '<div class="person__media person__media--circle-avatar" aria-hidden="true">' +
+        '<svg class="person__avatar-icon" viewBox="0 0 24 24" fill="currentColor">' +
+          '<path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>' +
+        '</svg>' +
+      '</div>';
+    }
+
+    var linkedinIcon = p.link
+      ? '<span class="person__social" title="' + esc(t("spk.linkedin")) + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></span>'
+      : '';
 
     var inner = media +
-      '<p class="person__n' + (named ? "" : " person__n--tba") + '">' + esc(name) + "</p>" +
-      '<p class="person__r">' + esc(pick(p.role)) + "</p>";
+      '<p class="person__n' + (named ? "" : " person__n--tba") + '">' + esc(name) + linkedinIcon + '</p>' +
+      '<p class="person__r">' + esc(pick(p.role)) + '</p>';
 
     return '<li class="person">' +
-      (p.link ? '<a class="person__link" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer">' + inner + "</a>" : inner) +
-      "</li>";
+      (p.link ? '<a class="person__link" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(name) + ' (LinkedIn)">' + inner + '</a>' : inner) +
+      '</li>';
   }
 
   function renderPeople() {
-    var s = $("#speakers-list");
-    if (s) s.innerHTML = SPEAKERS.map(personHTML).join("");
+    var container = $("#speakers-container");
+    var groups = (typeof SPEAKER_GROUPS !== "undefined") ? SPEAKER_GROUPS : window.SPEAKER_GROUPS;
+    if (container && groups) {
+      container.innerHTML = groups.map(function (g) {
+        var items = SPEAKERS.filter(function (s) { return s.group === g.id; });
+        if (!items.length) return "";
+        return '<div class="speakers-section reveal">' +
+          '<h2 class="speakers-section__t">' + esc(pick(g.title)) + '</h2>' +
+          '<ul class="people">' + items.map(personHTML).join("") + '</ul>' +
+        '</div>';
+      }).join("");
+    } else {
+      var s = $("#speakers-list");
+      if (s) s.innerHTML = SPEAKERS.map(personHTML).join("");
+    }
+
     var m = $("#team-list");
     if (m) m.innerHTML = TEAM.map(personHTML).join("");
   }
@@ -163,8 +192,6 @@
   /* ---------------------------------------------------------------------
      PARTNERS
      ------------------------------------------------------------------ */
-  /* Fills #sponsor-logos (partners page) and #home-partners (homepage).
-     data-groups="id1 id2" on the host limits which categories are shown. */
   function renderSponsors() {
     ["#sponsor-logos", "#home-partners"].forEach(function (sel) {
       var host = $(sel);
@@ -177,19 +204,158 @@
     function tile(x) {
       var inner = x.logo
         ? '<img src="' + esc(x.logo) + '" alt="' + esc(x.name) + '" loading="lazy">'
-        :'<span class="logos__name">' + esc(x.name) + "</span>";
+        : '<span class="logos__name">' + esc(x.name) + "</span>";
       return x.url
-        ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + inner + "</a>"
+        ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.name) + '">' + inner + "</a>"
         : "<div>" + inner + "</div>";
     }
     host.innerHTML = PARTNER_GROUPS.map(function (g) {
       if (only.length && only.indexOf(g.id) < 0) return "";
       var items = SPONSORS.filter(function (x) { return x.group === g.id; });
       if (!items.length) return "";
-      return '<div class="partner-group">' +
+      return '<div class="partner-group reveal">' +
         '<h2 class="partner-group__t">' + esc(pick(g.title)) + "</h2>" +
         '<div class="logos' + (g.size === "lg" ? " logos--lg" : "") + '">' + items.map(tile).join("") + "</div></div>";
     }).join("");
+  }
+
+  /* ---------------------------------------------------------------------
+     HACKATHON (QUANTUM STEALTHSHIELD)
+     ------------------------------------------------------------------ */
+  function renderHackathon() {
+    var host = $("#hackathon-root");
+    if (!host) return;
+
+    var revealTime = new Date(SITE.hackathonRevealISO).getTime();
+    var now = Date.now();
+    var isPreview = location.search.indexOf("preview") !== -1 || location.hash === "#preview";
+    var isLive = now >= revealTime || isPreview;
+    var ch = (typeof HACKATHON_CHALLENGE !== "undefined") ? HACKATHON_CHALLENGE : window.HACKATHON_CHALLENGE;
+    if (!ch) return;
+
+    var previewBadge = isPreview
+      ? '<div class="callout" style="border-color:var(--accent);margin-bottom:var(--sp-5);background:color-mix(in srgb,var(--accent) 12%,transparent)"><strong>⚠️ ' +
+        esc(window.I18n.lang === "fr" ? "Mode Prévisualisation Organisateur" : "Organizer Preview Mode") +
+        '</strong> — ' + esc(window.I18n.lang === "fr" ? "Cet énoncé sera automatiquement débloqué le jeudi 26 nov à 9 h 00 HNE." : "This prompt will be automatically unlocked on Thursday, Nov 26 at 9:00 AM EST.") +
+        '</div>'
+      : '';
+
+    var bannerHtml = '';
+    if (!isLive) {
+      bannerHtml = '<div class="hack-banner hack-banner--locked reveal">' +
+        '<div>' +
+          '<p style="font-size:var(--fs-lg);font-weight:700;margin-bottom:var(--sp-2)">🔒 ' + esc(t("hack.locked.banner")) + '</p>' +
+          '<p style="color:var(--text-muted);font-size:var(--fs-sm)">' +
+            esc(window.I18n.lang === "fr" ? "Les énoncés et jeux de données seront mis en ligne ici dès le début de l'épreuve. Rejoignez le serveur Discord pour trouver des coéquipiers dès maintenant !" : "Challenges and datasets will be released here as soon as the hackathon begins. Join our Discord server to form your team now!") +
+          '</p>' +
+        '</div>' +
+        '<div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;align-items:center">' +
+          '<a class="btn btn--primary" href="' + esc(SITE.discord) + '" target="_blank" rel="noopener noreferrer">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg> ' +
+            esc(t("hack.discord.cta")) +
+          '</a>' +
+        '</div>' +
+      '</div>';
+    } else {
+      bannerHtml = previewBadge +
+        '<div class="hack-banner hack-banner--live reveal">' +
+        '<div>' +
+          '<span class="chip" style="background:var(--accent);color:#fff;margin-bottom:var(--sp-2)">Quantum StealthShield · 8 Hours</span>' +
+          '<p style="font-size:var(--fs-lg);font-weight:800;margin-bottom:var(--sp-2)">🎯 ' + esc(pick(ch.subtitle)) + '</p>' +
+          '<p style="color:var(--text-muted);font-size:var(--fs-sm)">' + esc(pick(ch.mission)) + '</p>' +
+        '</div>' +
+        '<div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;margin-top:var(--sp-3)">' +
+          '<a class="btn btn--primary btn--sm" href="' + esc(ch.links.submissionForm) + '" target="_blank" rel="noopener noreferrer">' +
+            '🚀 ' + esc(window.I18n.lang === "fr" ? "Déposer la soumission" : "Submit project") +
+          '</a>' +
+          '<a class="btn btn--ghost btn--sm" href="' + esc(ch.links.datasetDownload) + '" target="_blank" rel="noopener noreferrer">' +
+            '📥 ' + esc(window.I18n.lang === "fr" ? "Télécharger le sujet (PDF)" : "Download prompt (PDF)") +
+          '</a>' +
+          '<a class="btn btn--ghost btn--sm" href="' + esc(SITE.discord) + '" target="_blank" rel="noopener noreferrer">' +
+            '💬 ' + esc(window.I18n.lang === "fr" ? "Salon Mentor Helpdesk" : "Mentor Helpdesk Discord") +
+          '</a>' +
+        '</div>' +
+      '</div>';
+    }
+
+    var filesTable = '<table class="hack-table">' +
+      '<thead><tr><th>' + esc(window.I18n.lang === "fr" ? "Fichier" : "File") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Lignes" : "Rows") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Labels" : "Labels") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Rôle" : "Role") + '</th></tr></thead>' +
+      '<tbody>' +
+      ch.dataset.files.map(function(f) {
+        return '<tr><td><code>' + esc(f.file) + '</code></td><td>' + esc(f.rows) + '</td><td>' + esc(pick(f.labels)) + '</td><td>' + esc(pick(f.role)) + '</td></tr>';
+      }).join('') +
+      '</tbody></table>';
+
+    var scoringCards = ch.scoring.breakdown.map(function(b) {
+      return '<div class="hack-stat"><div class="hack-stat__val">' + b.pts + ' <span style="font-size:var(--fs-xs)">pts</span></div><div class="hack-stat__lbl">' + esc(pick(b.title)) + '</div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">' + esc(pick(b.desc)) + '</p></div>';
+    }).join('');
+
+    host.innerHTML = bannerHtml +
+      '<div class="grid-2" style="margin-top:var(--sp-6)">' +
+        '<div class="card reveal">' +
+          '<h2 class="card__t">' + esc(t("hack.rules.title")) + '</h2>' +
+          '<ul class="ticks">' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(t("hack.r1")) + '</span></li>' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(t("hack.r2")) + '</span></li>' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(t("hack.r3")) + '</span></li>' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(t("hack.r4")) + '</span></li>' +
+          '</ul>' +
+          '<div class="callout">' +
+            '<strong>' + esc(t("hack.prep.title")) + '</strong><br>' +
+            '<span>' + esc(t("hack.prep.d")) + '</span><br>' +
+            '<span style="opacity:.85">' + esc(t("hack.prep.note")) + '</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="card reveal">' +
+          '<h2 class="card__t">' + esc(t("hack.judge.title")) + '</h2>' +
+          '<div class="criteria">' +
+            '<div class="crit"><p class="crit__t">' + esc(t("hack.j1.t")) + '</p><p class="crit__d">' + esc(t("hack.j1.d")) + '</p></div>' +
+            '<div class="crit"><p class="crit__t">' + esc(t("hack.j2.t")) + '</p><p class="crit__d">' + esc(t("hack.j2.d")) + '</p></div>' +
+            '<div class="crit"><p class="crit__t">' + esc(t("hack.j3.t")) + '</p><p class="crit__d">' + esc(t("hack.j3.d")) + '</p></div>' +
+            '<div class="crit"><p class="crit__t">' + esc(t("hack.j4.t")) + '</p><p class="crit__d">' + esc(t("hack.j4.d")) + '</p></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      (isLive ? (
+        '<div style="margin-top:var(--sp-8)">' +
+          '<div class="card reveal">' +
+            '<h2 class="card__t">📊 ' + esc(window.I18n.lang === "fr" ? "Structure des Données — 16 Métriques Réseau" : "Dataset Structure — 16 Network Features") + '</h2>' +
+            '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4)">' +
+              esc(window.I18n.lang === "fr"
+                ? "Chaque ligne résume une session réseau complète : volume, temporalité, répartition et direction. Labels cibles : 0 = Bénin, 1 = Attaque bruyante (loud), 2 = Attaque furtive (stealth)."
+                : "Each row summarizes a single network session: size, timing, direction, and dispersion. Target labels: 0 = Benign, 1 = Loud attack, 2 = Stealth attack.") +
+            '</p>' +
+            '<div class="hack-table-wrap">' + filesTable + '</div>' +
+            '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:var(--sp-3)"><code>' + ch.dataset.featuresList.join(' · ') + '</code></p>' +
+          '</div>' +
+
+          '<div class="card reveal" style="margin-top:var(--sp-6)">' +
+            '<h2 class="card__t">🎯 ' + esc(window.I18n.lang === "fr" ? "Détail de la Notation Prédictive (70 Points)" : "Predictive Scoring Details (70 Points)") + '</h2>' +
+            '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-3)"><code>' + ch.scoring.formula + '</code></p>' +
+            '<div class="hack-stat-grid">' + scoringCards + '</div>' +
+          '</div>' +
+
+          '<div class="card reveal hack-bonus" style="margin-top:var(--sp-6)">' +
+            '<h2 class="card__t" style="color:#ed1c24">⚡ ' + esc(window.I18n.lang === "fr" ? "+5 Points Bonus — Exécution Hardware Réel" : "+5 Bonus Points — Real Hardware Execution") + '</h2>' +
+            '<p style="font-size:var(--fs-sm)">' +
+              esc(window.I18n.lang === "fr"
+                ? "Gagnez 5 points bonus en exécutant votre circuit ou algorithme sur un vrai ordinateur quantique (IBM Quantum via Qiskit Runtime ou Quandela Cloud). Joignez impérativement vos identifiants d'exécution (Job IDs) et captures d'écran dans votre rendu."
+                : "Earn 5 bonus points by executing your circuit or model on real quantum processors (IBM Quantum via Qiskit Runtime or Quandela Cloud). Include job IDs and screenshots with your final submission folder.") +
+            '</p>' +
+          '</div>' +
+
+          '<div class="card reveal" style="margin-top:var(--sp-6)">' +
+            '<h2 class="card__t">📁 ' + esc(window.I18n.lang === "fr" ? "Modalités de Dépôt & Présentation" : "Submission Guidelines & Pitch") + '</h2>' +
+            '<ul class="ticks">' +
+              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Générez les deux fichiers CSV de prédictions : submission_hidden_a.csv et submission_hidden_b.csv (colonnes: sample_id,predicted_label)." : "Generate two prediction CSVs: submission_hidden_a.csv and submission_hidden_b.csv (columns: sample_id,predicted_label).") + '</span></li>' +
+              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Déposez une archive ZIP au nom de votre équipe contenant le code, les notebooks, les prédictions et vos preuves hardware." : "Submit a ZIP folder named after your team containing your code, notebooks, prediction CSVs, and hardware proof.") + '</span></li>' +
+              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Présentez 3 minutes chrono devant le jury suivies de 2 minutes de questions." : "Deliver a 3-minute pitch to the jury followed by 2 minutes of Q&A.") + '</span></li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>'
+      ) : '');
   }
 
   /* ---------------------------------------------------------------------
@@ -220,9 +386,6 @@
 
   /* ---------------------------------------------------------------------
      ADD TO CALENDAR
-     Opens the user's calendar in a new tab (Google / Outlook), or hands
-     over an .ics file for Apple Calendar. Downloading a file is the LAST
-     option, not the default.
      ------------------------------------------------------------------ */
   var EVENT_TITLE = "Qiskit Fall Fest 2026 — Polytechnique Montréal";
 
@@ -357,7 +520,12 @@
      BOOT
      ------------------------------------------------------------------ */
   function renderDynamic() {
-    renderProgram(); renderPeople(); renderSponsors(); renderFaq(); renderVenue();
+    renderProgram();
+    renderPeople();
+    renderSponsors();
+    renderHackathon();
+    renderFaq();
+    renderVenue();
   }
 
   function init() {

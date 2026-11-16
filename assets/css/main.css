@@ -407,10 +407,120 @@ main { flex: 1 0 auto; }
   filter: brightness(0) invert(1);   /* black silhouette → clean white */
   opacity: .78;
 }
+.person__media--circle-avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--ff-purple-60) 0%, var(--ff-magenta-60) 100%);
+  border: 2px solid var(--accent);
+}
+.person__avatar-icon {
+  width: 54%;
+  height: 54%;
+  fill: #ffffff;
+  opacity: 0.92;
+}
+.person__social {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 6px;
+  color: #0a66c2;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.person__link:hover .person__social {
+  opacity: 1;
+  transform: scale(1.15);
+}
 .person__link:hover .person__media { border-color: var(--accent); box-shadow: var(--shadow-md); }
 .person__n { font-size: var(--fs-base); font-weight: 700; }
 .person__n--tba { color: var(--text-muted); font-weight: 600; font-style: italic; }
 .person__r { font-size: var(--fs-sm); color: var(--text-muted); }
+
+.speakers-section { margin-bottom: var(--sp-8); }
+.speakers-section:last-child { margin-bottom: 0; }
+.speakers-section__t {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+}
+
+/* Hackathon Quantum StealthShield Styles */
+.hack-banner {
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: var(--r-lg);
+  margin-bottom: var(--sp-7);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+.hack-banner--locked {
+  background: color-mix(in srgb, var(--ff-purple-60) 12%, var(--surface));
+  border: 1px solid var(--ff-purple-60);
+}
+.hack-banner--live {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid var(--accent);
+}
+.hack-table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-4) 0;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+.hack-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+.hack-table th, .hack-table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.hack-table th {
+  background: var(--bg-alt);
+  font-weight: 700;
+  color: var(--text);
+}
+.hack-table tr:last-child td {
+  border-bottom: none;
+}
+.hack-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+.hack-stat {
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.hack-stat__val {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.hack-stat__lbl {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin-top: var(--sp-1);
+  font-weight: 600;
+}
+.hack-bonus {
+  background: linear-gradient(135deg, rgba(237, 28, 36, 0.08), rgba(241, 90, 34, 0.08));
+  border: 1px solid rgba(237, 28, 36, 0.4);
+}
 
 /* ---------- Venue ------------------------------------------------------- */
 .venue__grid { display: grid; gap: var(--sp-7); grid-template-columns: 1fr; }

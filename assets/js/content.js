@@ -5,7 +5,7 @@ const SITE = {
   linkedin:  "https://www.linkedin.com/feed/update/urn:li:activity:7490436894841974785/",
   instagram: "",
   github:    "",
-  discord:   "", //"https://discord.gg/G8FBKTcWGh",
+  discord:   "https://discord.gg/G8FBKTcWGh",
 
   url: "https://qiskitfallfestmtl.github.io/qiskit-fall-fest-2026/",
 
@@ -313,8 +313,8 @@ const PROGRAM = {
            en: "Graduate students and researchers pitch their innovative research against the clock." } },
     { start: "14:15", end: "15:30", type: "panel",
       t: { fr: "Table ronde d'experts", en: "Expert Panel Discussion" },
-      d: { fr: "Modérée avec Pr Soumaya Cherkaoui, Maxim Tremblay (Hydro-Québec), Juliette Geoffrion (Calcul Québec) et Pr Gabriela Nicolescu (Directrice GIGL, Polytechnique Montréal).",
-           en: "Moderated panel with Prof. Soumaya Cherkaoui, Maxim Tremblay (Hydro-Québec), Juliette Geoffrion (Calcul Québec), and Prof. Gabriela Nicolescu (GIGL Director, Polytechnique Montréal)." } },
+      d: { fr: "Modérée avec Pr Soumaya Cherkaoui, Maxim Tremblay (Hydro-Québec) et Juliette Geoffrion (Calcul Québec).",
+           en: "Moderated panel with Prof. Soumaya Cherkaoui, Maxim Tremblay (Hydro-Québec), and Juliette Geoffrion (Calcul Québec)." } },
     { start: "15:30", end: "16:30", type: "networking",
       t: { fr: "Formation des équipes et réseautage", en: "Team formation & networking" },
       d: { fr: "Trouvez vos coéquipiers pour le hackathon sur le serveur Discord.", en: "Find your teammates for tomorrow's hackathon on Discord." } }
@@ -428,6 +428,7 @@ const SPEAKERS = [
     role: { fr: "Panéliste — Calcul Québec", en: "Panelist — Calcul Québec" },
     link: "https://www.linkedin.com/in/juliette-geoffrion/"
   },
+  /*
   {
     name: "Pr Gabriela Nicolescu",
     group: "panel",
@@ -435,6 +436,7 @@ const SPEAKERS = [
     role: { fr: "Panéliste — Directrice du GIGL, Polytechnique Montréal", en: "Panelist — Director of GIGL, Polytechnique Montréal" },
     link: "https://www.linkedin.com/in/gabriela-nicolescu-154a41/"
   },
+  */
 
   // --- Jury du hackathon ---
   {

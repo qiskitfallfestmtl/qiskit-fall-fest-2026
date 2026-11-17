@@ -103,16 +103,16 @@ const I18N = {
     en: "Qiskit Fall Fest is a worldwide series of quantum computing events run by student communities with the support of IBM Quantum."
   },
   "about.p2": {
-    fr: "Pendant deux jours à Polytechnique Montréal, nous réunissons experts industriels, chercheurs et étudiants pour explorer le futur du calcul quantique, des algorithmes variationnels aux technologies photoniques, avant de vous mettre au défi lors du hackathon Quantum StealthShield.",
-    en: "Over two days at Polytechnique Montréal we bring together industry experts, researchers and students to explore quantum computing, from variational algorithms to photonic hardware, culminating in the Quantum StealthShield hackathon challenge."
+    fr: "Pendant deux jours à Polytechnique Montréal, nous réunissons experts industriels, chercheurs et étudiants pour explorer le futur du calcul quantique, des algorithmes variationnels aux technologies photoniques, avant de vous mettre au défi lors du grand hackathon quantique.",
+    en: "Over two days at Polytechnique Montréal we bring together industry experts, researchers and students to explore quantum computing, from variational algorithms to photonic hardware, culminating in the quantum hackathon challenge."
   },
   "about.outcomes.title": { fr: "Ce que vous gagnerez", en: "What you'll walk away with" },
   "about.o1.t": { fr: "Coder vos premiers circuits quantiques", en: "Write your first quantum circuits" },
   "about.o1.d": { fr: "Deux ateliers guidés en Python : Qiskit (IBM) et MerLin (Quandela).",
                   en: "Two guided workshops in Python: Qiskit (IBM) and MerLin (Quandela)." },
   "about.o2.t": { fr: "Résoudre un vrai défi en équipe", en: "Solve a real challenge as a team" },
-  "about.o2.d": { fr: "Un hackathon de 8 heures axé sur la cybersécurité et l'apprentissage automatique quantique.",
-                  en: "An 8-hour hackathon focused on cybersecurity and quantum machine learning." },
+  "about.o2.d": { fr: "Un hackathon de 8 heures axé sur l'apprentissage automatique quantique et la résolution de défis réels.",
+                  en: "An 8-hour hackathon focused on quantum machine learning and solving real-world challenges." },
   "about.o3.t": { fr: "Rencontrer l'écosystème quantique", en: "Meet the quantum ecosystem" },
   "about.o3.d": { fr: "Échangez avec des experts de Polytechnique Montréal, IBM, Quandela, Quantacet, Hydro-Québec, Calcul Québec et de l'AMF.",
                   en: "Connect with experts from Polytechnique Montréal, IBM, Quandela, Quantacet, Hydro-Québec, Calcul Québec and the AMF." },
@@ -139,10 +139,10 @@ const I18N = {
 
   /* ---- Hackathon page ---- */
   "hack.eyebrow": { fr: "Le Hackathon", en: "The Hackathon" },
-  "hack.title":   { fr: "Quantum StealthShield", en: "Quantum StealthShield" },
+  "hack.title":   { fr: "Le Hackathon Quantique", en: "The Quantum Hackathon" },
   "hack.lede": {
-    fr: "Détecter les cyberattaques furtives qui se dissimulent dans le trafic réseau normal grâce au Machine Learning Quantique.",
-    en: "Detecting stealth cyberattacks hiding inside normal network traffic, with quantum machine learning."
+    fr: "8 heures d'épreuve intensive en équipe pour concevoir et implémenter des algorithmes quantiques innovants. L'énoncé complet et les jeux de données seront dévoilés le Jour 2.",
+    en: "8 hours of intensive team competition to design and implement innovative quantum algorithms. The complete challenge prompt and datasets will be revealed on Day 2."
   },
   "hack.countdown.t": { fr: "Dévoilement des défis dans", en: "Prompts reveal in" },
   "hack.rules.title": { fr: "Modalités", en: "Rules" },
@@ -152,7 +152,7 @@ const I18N = {
   "hack.r4": { fr: "Présentation finale de 3 minutes devant jury + 2 minutes de questions.", en: "Final 3-minute pitch followed by 2-minute jury Q&A." },
   "hack.judge.title": { fr: "Barème officiel d'évaluation", en: "Official Scoring Breakdown" },
   "hack.j1.t": { fr: "70 pts — Prédictions", en: "70 pts — Predictions" },
-  "hack.j1.d": { fr: "Score combiné : 0.6 x Hidden B + 0.4 x Hidden A.", en: "Combined score: 0.6 x Hidden B + 0.4 x Hidden A." },
+  "hack.j1.d": { fr: "Score combiné", en: "Combined score" },
   "hack.j2.t": { fr: "30 pts — Délibération du Jury", en: "30 pts — Jury Pitch & Q&A" },
   "hack.j2.d": { fr: "Clarté de l'explication, rigueur de l'approche algorithmique et réponse aux questions.", en: "Clarity of presentation, algorithmic rigor, and handling of jury questions." },
   "hack.j3.t": { fr: "+5 pts BONUS — Hardware Quantique Réel", en: "+5 pts BONUS — Real Quantum Hardware" },
@@ -324,7 +324,7 @@ const PROGRAM = {
       t: { fr: "Accueil et café", en: "Registration & coffee" },
       d: { fr: "Café d'accueil, installation.", en: "Morning coffee, team seating and setup." } },
     { start: "08:45", end: "09:15", type: "ceremony",
-      t: { fr: "Dévoilement du défi: Quantum StealthShield", en: "Prompt reveal: Quantum StealthShield" },
+      t: { fr: "Dévoilement du défi du hackathon", en: "Hackathon challenge prompt reveal" },
       d: { fr: "Publication de l'énoncé, distribution des jeux de données, explication du barème.",
            en: "Challenge prompt release, distribution of datasets, scoring briefing." } },
     { start: "09:15", end: "11:45", type: "hackathon",
@@ -544,65 +544,30 @@ const SPONSORS = [
 ];
 
 /* -------------------------------------------------------------------------
-   8. HACKATHON CHALLENGE — QUANTUM STEALTHSHIELD
+   8. HACKATHON CHALLENGE (Encrypted payload until official reveal)
    ---------------------------------------------------------------------- */
-const HACKATHON_CHALLENGE = {
-  title: "Quantum StealthShield",
-  subtitle: {
-    fr: "Détecter les cyberattaques furtives dans le trafic réseau normal",
-    en: "Detecting attacks that hide inside normal network traffic"
-  },
-  duration: "8 heures / 8 hours",
-  mission: {
-    fr: "Construire un classifieur quantique ou hybride capable de :\n(1) détecter les attaques furtives,\n(2) déclencher un minimum de fausses alertes sur le trafic bénin, et \n(3) maintenir ses performances face aux dérives de distribution et variations du réseau.",
-    en: "Build a quantum or hybrid classifier that:\n(1) catches stealth attacks, \n(2) raises few false alarms on legitimate traffic, and \n(3) keeps working when the network changes."
-  },
-  dataset: {
-    featuresCount: 16,
-    featuresList: [
-      "duration_s", "packet_count", "mean_packet_bytes", "std_packet_bytes",
-      "mean_interarrival_ms", "cv_interarrival", "out_in_byte_ratio", "connections_per_min",
-      "unique_destinations", "port_diversity", "failure_ratio", "burstiness",
-      "packet_size_entropy", "periodicity", "historical_deviation", "temporal_correlation"
-    ],
-    labels: [
-      { id: 0, text: { fr: "0 = Trafic bénin", en: "0 = Benign traffic" } },
-      { id: 1, text: { fr: "1 = Attaque bruyante", en: "1 = Loud attack" } },
-      { id: 2, text: { fr: "2 = Attaque furtive", en: "2 = Stealth attack" } }
-    ],
-    files: [
-      { file: "train.csv", rows: "8 000", labels: { fr: "Oui", en: "Yes" }, role: { fr: "Entraîner votre modèle", en: "Learn your model" } },
-      { file: "validation.csv", rows: "1 000", labels: { fr: "Oui", en: "Yes" }, role: { fr: "Ajuster et valider sur de nouveaux environnements", en: "Tune and check, on new environments" } },
-      { file: "test_hidden_a.csv", rows: "1 000", labels: { fr: "Non", en: "No" }, role: { fr: "Évalué comme Caché A : nouveaux environnements", en: "Scored as Hidden A: new environments" } },
-      { file: "test_hidden_b.csv", rows: "1 000", labels: { fr: "Non", en: "No" }, role: { fr: "Évalué comme Caché B : conditions sévères, dérive de distribution", en: "Scored as Hidden B: harsher conditions, distribution shift" } }
-    ]
-  },
-  scoring: {
-    predictionsPts: 70,
-    formula: "Score Final = 0.6 × Hidden_B + 0.4 × Hidden_A",
-    breakdown: [
-      { pts: 25, title: { fr: "Classification globale", en: "Overall classification" }, desc: { fr: "Macro-F1 sur les classes bénigne, bruyante et furtive", en: "Macro-F1 over benign, loud and stealth" } },
-      { pts: 10, title: { fr: "F1 Furtif", en: "Stealth F1" }, desc: { fr: "Score F1 spécifique de la classe furtive", en: "F1 score of the stealth class" } },
-      { pts: 10, title: { fr: "Précision Furtif", en: "Stealth Precision" }, desc: { fr: "Sessions prédites comme furtives qui le sont réellement", en: "Sessions predicted as stealth that really are stealth" } },
-      { pts: 15, title: { fr: "Détection sans omission", en: "Catches stealth" }, desc: { fr: "Furtifs non manqués × bénins non marqués comme attaque", en: "Stealth not missed × benign not flagged as attack" } },
-      { pts: 10, title: { fr: "Dénomination exacte", en: "Names stealth" }, desc: { fr: "Furtifs étiquetés 2 × bénins non étiquetés 2", en: "Stealth labelled 2 × benign not labelled 2" } }
-    ],
-    juryPts: 30,
-    hardwareBonusPts: 5,
-    maxSolutions: 2 // 1 Qiskit, 1 MerLin
-  },
-  handIn: {
-    files: ["submission_hidden_a.csv", "submission_hidden_b.csv"],
-    format: "sample_id,predicted_label",
-    pitch: "3 minutes de présentation + 2 minutes de questions du jury",
-    teamFolder: "Dossier zippé au nom de votre équipe"
-  },
-  links: {
-    datasetDownload: "Quantum StealthShield.pdf", // Link to documentation/dataset package
-    submissionForm: "https://forms.cloud.microsoft/",
-    discord: "https://discord.gg/V7nZqX6D"
+const _ENCODED_CHALLENGE = "eyJ0aXRsZSI6ICJRdWFudHVtIFN0ZWFsdGhTaGllbGQiLCAic3VidGl0bGUiOiB7ImZyIjogIkTDqXRlY3RlciBsZXMgY3liZXJhdHRhcXVlcyBmdXJ0aXZlcyBkYW5zIGxlIHRyYWZpYyByw6lzZWF1IG5vcm1hbCIsICJlbiI6ICJEZXRlY3RpbmcgYXR0YWNrcyB0aGF0IGhpZGUgaW5zaWRlIG5vcm1hbCBuZXR3b3JrIHRyYWZmaWMifSwgImR1cmF0aW9uIjogIjggaGV1cmVzIC8gOCBob3VycyIsICJtaXNzaW9uIjogeyJmciI6ICJDb25zdHJ1aXJlIHVuIGNsYXNzaWZpZXVyIHF1YW50aXF1ZSBvdSBoeWJyaWRlIGNhcGFibGUgZGUgOlxuKDEpIGTDqXRlY3RlciBsZXMgYXR0YXF1ZXMgZnVydGl2ZXMsXG4oMikgZMOpY2xlbmNoZXIgdW4gbWluaW11bSBkZSBmYXVzc2VzIGFsZXJ0ZXMgc3VyIGxlIHRyYWZpYyBiw6luaW4sIGV0IFxuKDMpIG1haW50ZW5pciBzZXMgcGVyZm9ybWFuY2VzIGZhY2UgYXV4IGTDqXJpdmVzIGRlIGRpc3RyaWJ1dGlvbiBldCB2YXJpYXRpb25zIGR1IHLDqXNlYXUuIiwgImVuIjogIkJ1aWxkIGEgcXVhbnR1bSBvciBoeWJyaWQgY2xhc3NpZmllciB0aGF0OlxuKDEpIGNhdGNoZXMgc3RlYWx0aCBhdHRhY2tzLCBcbigyKSByYWlzZXMgZmV3IGZhbHNlIGFsYXJtcyBvbiBsZWdpdGltYXRlIHRyYWZmaWMsIGFuZCBcbigzKSBrZWVwcyB3b3JraW5nIHdoZW4gdGhlIG5ldHdvcmsgY2hhbmdlcy4ifSwgImRhdGFzZXQiOiB7ImZlYXR1cmVzQ291bnQiOiAxNiwgImZlYXR1cmVzTGlzdCI6IFsiZHVyYXRpb25fcyIsICJwYWNrZXRfY291bnQiLCAibWVhbl9wYWNrZXRfYnl0ZXMiLCAic3RkX3BhY2tldF9ieXRlcyIsICJtZWFuX2ludGVyYXJyaXZhbF9tcyIsICJjdl9pbnRlcmFycml2YWwiLCAib3V0X2luX2J5dGVfcmF0aW8iLCAiY29ubmVjdGlvbnNfcGVyX21pbiIsICJ1bmlxdWVfZGVzdGluYXRpb25zIiwgInBvcnRfZGl2ZXJzaXR5IiwgImZhaWx1cmVfcmF0aW8iLCAiYnVyc3RpbmVzcyIsICJwYWNrZXRfc2l6ZV9lbnRyb3B5IiwgInBlcmlvZGljaXR5IiwgImhpc3RvcmljYWxfZGV2aWF0aW9uIiwgInRlbXBvcmFsX2NvcnJlbGF0aW9uIl0sICJsYWJlbHMiOiBbeyJpZCI6IDAsICJ0ZXh0IjogeyJmciI6ICIwID0gVHJhZmljIGLDqW5pbiIsICJlbiI6ICIwID0gQmVuaWduIHRyYWZmaWMifX0sIHsiaWQiOiAxLCAidGV4dCI6IHsiZnIiOiAiMSA9IEF0dGFxdWUgYnJ1eWFudGUiLCAiZW4iOiAiMSA9IExvdWQgYXR0YWNrIn19LCB7ImlkIjogMiwgInRleHQiOiB7ImZyIjogIjIgPSBBdHRhcXVlIGZ1cnRpdmUiLCAiZW4iOiAiMiA9IFN0ZWFsdGggYXR0YWNrIn19XSwgImZpbGVzIjogW3siZmlsZSI6ICJ0cmFpbi5jc3YiLCAicm93cyI6ICI4IDAwMCIsICJsYWJlbHMiOiB7ImZyIjogIk91aSIsICJlbiI6ICJZZXMifSwgInJvbGUiOiB7ImZyIjogIkVudHJhw65uZXIgdm90cmUgbW9kw6hsZSIsICJlbiI6ICJMZWFybiB5b3VyIG1vZGVsIn19LCB7ImZpbGUiOiAidmFsaWRhdGlvbi5jc3YiLCAicm93cyI6ICIxIDAwMCIsICJsYWJlbHMiOiB7ImZyIjogIk91aSIsICJlbiI6ICJZZXMifSwgInJvbGUiOiB7ImZyIjogIkFqdXN0ZXIgZXQgdmFsaWRlciBzdXIgZGUgbm91dmVhdXggZW52aXJvbm5lbWVudHMiLCAiZW4iOiAiVHVuZSBhbmQgY2hlY2ssIG9uIG5ldyBlbnZpcm9ubWVudHMifX0sIHsiZmlsZSI6ICJ0ZXN0X2hpZGRlbl9hLmNzdiIsICJyb3dzIjogIjEgMDAwIiwgImxhYmVscyI6IHsiZnIiOiAiTm9uIiwgImVuIjogIk5vIn0sICJyb2xlIjogeyJmciI6ICLDiXZhbHXDqSBjb21tZSBDYWNow6kgQSA6IG5vdXZlYXV4IGVudmlyb25uZW1lbnRzIiwgImVuIjogIlNjb3JlZCBhcyBIaWRkZW4gQTogbmV3IGVudmlyb25tZW50cyJ9fSwgeyJmaWxlIjogInRlc3RfaGlkZGVuX2IuY3N2IiwgInJvd3MiOiAiMSAwMDAiLCAibGFiZWxzIjogeyJmciI6ICJOb24iLCAiZW4iOiAiTm8ifSwgInJvbGUiOiB7ImZyIjogIsOJdmFsdcOpIGNvbW1lIENhY2jDqSBCIDogY29uZGl0aW9ucyBzw6l2w6hyZXMsIGTDqXJpdmUgZGUgZGlzdHJpYnV0aW9uIiwgImVuIjogIlNjb3JlZCBhcyBIaWRkZW4gQjogaGFyc2hlciBjb25kaXRpb25zLCBkaXN0cmlidXRpb24gc2hpZnQifX1dfSwgInNjb3JpbmciOiB7InByZWRpY3Rpb25zUHRzIjogNzAsICJmb3JtdWxhIjogIlNjb3JlIEZpbmFsID0gMC42IMOXIEhpZGRlbl9CICsgMC40IMOXIEhpZGRlbl9BIiwgImJyZWFrZG93biI6IFt7InB0cyI6IDI1LCAidGl0bGUiOiB7ImZyIjogIkNsYXNzaWZpY2F0aW9uIGdsb2JhbGUiLCAiZW4iOiAiT3ZlcmFsbCBjbGFzc2lmaWNhdGlvbiJ9LCAiZGVzYyI6IHsiZnIiOiAiTWFjcm8tRjEgc3VyIGxlcyBjbGFzc2VzIGLDqW5pZ25lLCBicnV5YW50ZSBldCBmdXJ0aXZlIiwgImVuIjogIk1hY3JvLUYxIG92ZXIgYmVuaWduLCBsb3VkIGFuZCBzdGVhbHRoIn19LCB7InB0cyI6IDEwLCAidGl0bGUiOiB7ImZyIjogIkYxIEZ1cnRpZiIsICJlbiI6ICJTdGVhbHRoIEYxIn0sICJkZXNjIjogeyJmciI6ICJTY29yZSBGMSBzcMOpY2lmaXF1ZSBkZSBsYSBjbGFzc2UgZnVydGl2ZSIsICJlbiI6ICJGMSBzY29yZSBvZiB0aGUgc3RlYWx0aCBjbGFzcyJ9fSwgeyJwdHMiOiAxMCwgInRpdGxlIjogeyJmciI6ICJQcsOpY2lzaW9uIEZ1cnRpZiIsICJlbiI6ICJTdGVhbHRoIFByZWNpc2lvbiJ9LCAiZGVzYyI6IHsiZnIiOiAiU2Vzc2lvbnMgcHLDqWRpdGVzIGNvbW1lIGZ1cnRpdmVzIHF1aSBsZSBzb250IHLDqWVsbGVtZW50IiwgImVuIjogIlNlc3Npb25zIHByZWRpY3RlZCBhcyBzdGVhbHRoIHRoYXQgcmVhbGx5IGFyZSBzdGVhbHRoIn19LCB7InB0cyI6IDE1LCAidGl0bGUiOiB7ImZyIjogIkTDqXRlY3Rpb24gc2FucyBvbWlzc2lvbiIsICJlbiI6ICJDYXRjaGVzIHN0ZWFsdGgifSwgImRlc2MiOiB7ImZyIjogIkZ1cnRpZnMgbm9uIG1hbnF1w6lzIMOXIGLDqW5pbnMgbm9uIG1hcnF1w6lzIGNvbW1lIGF0dGFxdWUiLCAiZW4iOiAiU3RlYWx0aCBub3QgbWlzc2VkIMOXIGJlbmlnbiBub3QgZmxhZ2dlZCBhcyBhdHRhY2sifX0sIHsicHRzIjogMTAsICJ0aXRsZSI6IHsiZnIiOiAiRMOpbm9taW5hdGlvbiBleGFjdGUiLCAiZW4iOiAiTmFtZXMgc3RlYWx0aCJ9LCAiZGVzYyI6IHsiZnIiOiAiRnVydGlmcyDDqXRpcXVldMOpcyAyIMOXIGLDqW5pbnMgbm9uIMOpdGlxdWV0w6lzIDIiLCAiZW4iOiAiU3RlYWx0aCBsYWJlbGxlZCAyIMOXIGJlbmlnbiBub3QgbGFiZWxsZWQgMiJ9fV0sICJqdXJ5UHRzIjogMzAsICJoYXJkd2FyZUJvbnVzUHRzIjogNSwgIm1heFNvbHV0aW9ucyI6IDJ9LCAiaGFuZEluIjogeyJmaWxlcyI6IFsic3VibWlzc2lvbl9oaWRkZW5fYS5jc3YiLCAic3VibWlzc2lvbl9oaWRkZW5fYi5jc3YiXSwgImZvcm1hdCI6ICJzYW1wbGVfaWQscHJlZGljdGVkX2xhYmVsIiwgInBpdGNoIjogIjMgbWludXRlcyBkZSBwcsOpc2VudGF0aW9uICsgMiBtaW51dGVzIGRlIHF1ZXN0aW9ucyBkdSBqdXJ5IiwgInRlYW1Gb2xkZXIiOiAiRG9zc2llciB6aXBww6kgYXUgbm9tIGRlIHZvdHJlIMOpcXVpcGUifSwgImxpbmtzIjogeyJkYXRhc2V0RG93bmxvYWQiOiAiUXVhbnR1bSBTdGVhbHRoU2hpZWxkLnBkZiIsICJzdWJtaXNzaW9uRm9ybSI6ICJodHRwczovL2Zvcm1zLmNsb3VkLm1pY3Jvc29mdC8iLCAiZGlzY29yZCI6ICJodHRwczovL2Rpc2NvcmQuZ2cvVjduWnFYNkQifX0=";
+
+function loadHackathonChallenge() {
+  try {
+    var bin = atob(_ENCODED_CHALLENGE);
+    var bytes = Uint8Array.from(bin, function(m) { return m.charCodeAt(0); });
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch(e) {
+    return null;
   }
-};
+}
+
+// Auto-unseal when live or in preview mode
+var HACKATHON_CHALLENGE = null;
+if (typeof window !== "undefined") {
+  var _now = Date.now();
+  var _rev = typeof SITE !== "undefined" && SITE.hackathonRevealISO ? new Date(SITE.hackathonRevealISO).getTime() : 0;
+  var _prev = window.location && (window.location.search.indexOf("preview") !== -1 || window.location.hash === "#preview");
+  if (_now >= _rev || _prev) {
+    HACKATHON_CHALLENGE = loadHackathonChallenge();
+  }
+}
 
 /* -------------------------------------------------------------------------
    9. FAQ

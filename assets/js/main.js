@@ -221,7 +221,7 @@
   }
 
   /* ---------------------------------------------------------------------
-     HACKATHON (QUANTUM STEALTHSHIELD)
+     HACKATHON
      ------------------------------------------------------------------ */
   function renderHackathon() {
     var host = $("#hackathon-root");
@@ -231,18 +231,19 @@
     var now = Date.now();
     var isPreview = location.search.indexOf("preview") !== -1 || location.hash === "#preview";
     var isLive = now >= revealTime || isPreview;
-    var ch = (typeof HACKATHON_CHALLENGE !== "undefined") ? HACKATHON_CHALLENGE : window.HACKATHON_CHALLENGE;
-    if (!ch) return;
+    var ch = isLive
+      ? (typeof loadHackathonChallenge === "function" ? loadHackathonChallenge() : (typeof HACKATHON_CHALLENGE !== "undefined" ? HACKATHON_CHALLENGE : window.HACKATHON_CHALLENGE))
+      : null;
 
     var previewBadge = isPreview
       ? '<div class="callout" style="border-color:var(--accent);margin-bottom:var(--sp-5);background:color-mix(in srgb,var(--accent) 12%,transparent)"><strong>⚠️ ' +
         esc(window.I18n.lang === "fr" ? "Mode Prévisualisation Organisateur" : "Organizer Preview Mode") +
-        '</strong> — ' + esc(window.I18n.lang === "fr" ? "Cet énoncé sera automatiquement débloqué le jeudi 26 nov à 9 h 00 HNE." : "This prompt will be automatically unlocked on Thursday, Nov 26 at 9:00 AM EST.") +
+        '</strong> — ' + esc(window.I18n.lang === "fr" ? "Cet énoncé sera automatiquement débloqué le jeudi 26 nov à 8 h 45 HNE." : "This prompt will be automatically unlocked on Thursday, Nov 26 at 8:45 AM EST.") +
         '</div>'
       : '';
 
     var bannerHtml = '';
-    if (!isLive) {
+    if (!isLive || !ch) {
       bannerHtml = '<div class="hack-banner hack-banner--locked reveal">' +
         '<div>' +
           '<p style="font-size:var(--fs-lg);font-weight:700;margin-bottom:var(--sp-2)">🔒 ' + esc(t("hack.locked.banner")) + '</p>' +
@@ -261,7 +262,7 @@
       bannerHtml = previewBadge +
         '<div class="hack-banner hack-banner--live reveal">' +
         '<div>' +
-          '<span class="chip" style="background:var(--accent);color:#fff;margin-bottom:var(--sp-2)">Quantum StealthShield · 8 Hours</span>' +
+          '<span class="chip" style="background:var(--accent);color:#fff;margin-bottom:var(--sp-2)">' + esc(ch.title) + ' · 8 Hours</span>' +
           '<p style="font-size:var(--fs-lg);font-weight:800;margin-bottom:var(--sp-2)">🎯 ' + esc(pick(ch.subtitle)) + '</p>' +
           '<p style="color:var(--text-muted);font-size:var(--fs-sm)">' + esc(pick(ch.mission)) + '</p>' +
         '</div>' +
@@ -279,17 +280,61 @@
       '</div>';
     }
 
-    var filesTable = '<table class="hack-table">' +
-      '<thead><tr><th>' + esc(window.I18n.lang === "fr" ? "Fichier" : "File") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Lignes" : "Rows") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Labels" : "Labels") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Rôle" : "Role") + '</th></tr></thead>' +
-      '<tbody>' +
-      ch.dataset.files.map(function(f) {
-        return '<tr><td><code>' + esc(f.file) + '</code></td><td>' + esc(f.rows) + '</td><td>' + esc(pick(f.labels)) + '</td><td>' + esc(pick(f.role)) + '</td></tr>';
-      }).join('') +
-      '</tbody></table>';
+    var liveDetailsHtml = '';
+    if (isLive && ch && ch.dataset && ch.scoring) {
+      var filesTable = '<table class="hack-table">' +
+        '<thead><tr><th>' + esc(window.I18n.lang === "fr" ? "Fichier" : "File") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Lignes" : "Rows") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Labels" : "Labels") + '</th><th>' + esc(window.I18n.lang === "fr" ? "Rôle" : "Role") + '</th></tr></thead>' +
+        '<tbody>' +
+        ch.dataset.files.map(function(f) {
+          return '<tr><td><code>' + esc(f.file) + '</code></td><td>' + esc(f.rows) + '</td><td>' + esc(pick(f.labels)) + '</td><td>' + esc(pick(f.role)) + '</td></tr>';
+        }).join('') +
+        '</tbody></table>';
 
-    var scoringCards = ch.scoring.breakdown.map(function(b) {
-      return '<div class="hack-stat"><div class="hack-stat__val">' + b.pts + ' <span style="font-size:var(--fs-xs)">pts</span></div><div class="hack-stat__lbl">' + esc(pick(b.title)) + '</div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">' + esc(pick(b.desc)) + '</p></div>';
-    }).join('');
+      var scoringCards = ch.scoring.breakdown.map(function(b) {
+        return '<div class="hack-stat"><div class="hack-stat__val">' + b.pts + ' <span style="font-size:var(--fs-xs)">pts</span></div><div class="hack-stat__lbl">' + esc(pick(b.title)) + '</div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">' + esc(pick(b.desc)) + '</p></div>';
+      }).join('');
+
+      var labelsDesc = (ch.dataset && ch.dataset.labels)
+        ? (window.I18n.lang === "fr" ? "Labels cibles : " : "Target labels: ") + ch.dataset.labels.map(function(l) { return esc(pick(l.text)); }).join(", ") + "."
+        : "";
+
+      liveDetailsHtml = '<div style="margin-top:var(--sp-8)">' +
+        '<div class="card reveal">' +
+          '<h2 class="card__t">📊 ' + esc(window.I18n.lang === "fr" ? "Structure des Données — 16 Métriques Réseau" : "Dataset Structure — 16 Network Features") + '</h2>' +
+          '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4)">' +
+            esc(window.I18n.lang === "fr"
+              ? "Chaque ligne résume une session réseau complète : volume, temporalité, répartition et direction. " + labelsDesc
+              : "Each row summarizes a single network session: size, timing, direction, and dispersion. " + labelsDesc) +
+          '</p>' +
+          '<div class="hack-table-wrap">' + filesTable + '</div>' +
+          '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:var(--sp-3)"><code>' + ch.dataset.featuresList.join(' · ') + '</code></p>' +
+        '</div>' +
+
+        '<div class="card reveal" style="margin-top:var(--sp-6)">' +
+          '<h2 class="card__t">🎯 ' + esc(window.I18n.lang === "fr" ? "Détail de la Notation Prédictive (70 Points)" : "Predictive Scoring Details (70 Points)") + '</h2>' +
+          '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-3)"><code>' + ch.scoring.formula + '</code></p>' +
+          '<div class="hack-stat-grid">' + scoringCards + '</div>' +
+        '</div>' +
+
+        '<div class="card reveal hack-bonus" style="margin-top:var(--sp-6)">' +
+          '<h2 class="card__t" style="color:#ed1c24">⚡ ' + esc(window.I18n.lang === "fr" ? "+5 Points Bonus — Exécution Hardware Réel" : "+5 Bonus Points — Real Hardware Execution") + '</h2>' +
+          '<p style="font-size:var(--fs-sm)">' +
+            esc(window.I18n.lang === "fr"
+              ? "Gagnez 5 points bonus en exécutant votre circuit ou algorithme sur un vrai ordinateur quantique (IBM Quantum via Qiskit Runtime ou Quandela Cloud). Joignez impérativement vos identifiants d'exécution (Job IDs) et captures d'écran dans votre rendu."
+              : "Earn 5 bonus points by executing your circuit or model on real quantum processors (IBM Quantum via Qiskit Runtime or Quandela Cloud). Include job IDs and screenshots with your final submission folder.") +
+          '</p>' +
+        '</div>' +
+
+        '<div class="card reveal" style="margin-top:var(--sp-6)">' +
+          '<h2 class="card__t">📁 ' + esc(window.I18n.lang === "fr" ? "Modalités de Dépôt & Présentation" : "Submission Guidelines & Pitch") + '</h2>' +
+          '<ul class="ticks">' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Générez les deux fichiers CSV de prédictions : submission_hidden_a.csv et submission_hidden_b.csv (colonnes: sample_id,predicted_label)." : "Generate two prediction CSVs: submission_hidden_a.csv and submission_hidden_b.csv (columns: sample_id,predicted_label).") + '</span></li>' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Déposez une archive ZIP au nom de votre équipe contenant le code, les notebooks, les prédictions et vos preuves hardware." : "Submit a ZIP folder named after your team containing your code, notebooks, prediction CSVs, and hardware proof.") + '</span></li>' +
+            '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Présentez 3 minutes chrono devant le jury suivies de 2 minutes de questions." : "Deliver a 3-minute pitch to the jury followed by 2 minutes of Q&A.") + '</span></li>' +
+          '</ul>' +
+        '</div>' +
+      '</div>';
+    }
 
     host.innerHTML = bannerHtml +
       '<div class="grid-2" style="margin-top:var(--sp-6)">' +
@@ -318,45 +363,7 @@
           '</div>' +
         '</div>' +
       '</div>' +
-
-      (isLive ? (
-        '<div style="margin-top:var(--sp-8)">' +
-          '<div class="card reveal">' +
-            '<h2 class="card__t">📊 ' + esc(window.I18n.lang === "fr" ? "Structure des Données — 16 Métriques Réseau" : "Dataset Structure — 16 Network Features") + '</h2>' +
-            '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4)">' +
-              esc(window.I18n.lang === "fr"
-                ? "Chaque ligne résume une session réseau complète : volume, temporalité, répartition et direction. Labels cibles : 0 = Bénin, 1 = Attaque bruyante (loud), 2 = Attaque furtive (stealth)."
-                : "Each row summarizes a single network session: size, timing, direction, and dispersion. Target labels: 0 = Benign, 1 = Loud attack, 2 = Stealth attack.") +
-            '</p>' +
-            '<div class="hack-table-wrap">' + filesTable + '</div>' +
-            '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:var(--sp-3)"><code>' + ch.dataset.featuresList.join(' · ') + '</code></p>' +
-          '</div>' +
-
-          '<div class="card reveal" style="margin-top:var(--sp-6)">' +
-            '<h2 class="card__t">🎯 ' + esc(window.I18n.lang === "fr" ? "Détail de la Notation Prédictive (70 Points)" : "Predictive Scoring Details (70 Points)") + '</h2>' +
-            '<p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-3)"><code>' + ch.scoring.formula + '</code></p>' +
-            '<div class="hack-stat-grid">' + scoringCards + '</div>' +
-          '</div>' +
-
-          '<div class="card reveal hack-bonus" style="margin-top:var(--sp-6)">' +
-            '<h2 class="card__t" style="color:#ed1c24">⚡ ' + esc(window.I18n.lang === "fr" ? "+5 Points Bonus — Exécution Hardware Réel" : "+5 Bonus Points — Real Hardware Execution") + '</h2>' +
-            '<p style="font-size:var(--fs-sm)">' +
-              esc(window.I18n.lang === "fr"
-                ? "Gagnez 5 points bonus en exécutant votre circuit ou algorithme sur un vrai ordinateur quantique (IBM Quantum via Qiskit Runtime ou Quandela Cloud). Joignez impérativement vos identifiants d'exécution (Job IDs) et captures d'écran dans votre rendu."
-                : "Earn 5 bonus points by executing your circuit or model on real quantum processors (IBM Quantum via Qiskit Runtime or Quandela Cloud). Include job IDs and screenshots with your final submission folder.") +
-            '</p>' +
-          '</div>' +
-
-          '<div class="card reveal" style="margin-top:var(--sp-6)">' +
-            '<h2 class="card__t">📁 ' + esc(window.I18n.lang === "fr" ? "Modalités de Dépôt & Présentation" : "Submission Guidelines & Pitch") + '</h2>' +
-            '<ul class="ticks">' +
-              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Générez les deux fichiers CSV de prédictions : submission_hidden_a.csv et submission_hidden_b.csv (colonnes: sample_id,predicted_label)." : "Generate two prediction CSVs: submission_hidden_a.csv and submission_hidden_b.csv (columns: sample_id,predicted_label).") + '</span></li>' +
-              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Déposez une archive ZIP au nom de votre équipe contenant le code, les notebooks, les prédictions et vos preuves hardware." : "Submit a ZIP folder named after your team containing your code, notebooks, prediction CSVs, and hardware proof.") + '</span></li>' +
-              '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>' + esc(window.I18n.lang === "fr" ? "Présentez 3 minutes chrono devant le jury suivies de 2 minutes de questions." : "Deliver a 3-minute pitch to the jury followed by 2 minutes of Q&A.") + '</span></li>' +
-            '</ul>' +
-          '</div>' +
-        '</div>'
-      ) : '');
+      liveDetailsHtml;
   }
 
   /* ---------------------------------------------------------------------

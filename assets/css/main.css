@@ -455,7 +455,7 @@ main { flex: 1 0 auto; }
   color: var(--text);
 }
 
-/* Hackathon Quantum StealthShield Styles */
+/* Hackathon Styles */
 .hack-banner {
   padding: var(--sp-5) var(--sp-6);
   border-radius: var(--r-lg);

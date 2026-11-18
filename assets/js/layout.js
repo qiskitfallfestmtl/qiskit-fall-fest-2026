@@ -14,11 +14,7 @@
   /* Which page are we on? */
   var here = location.pathname.split("/").pop() || "index.html";
 
-  /* 
-     The IBM Quantum lockup, rebuilt as type.
-     Branding rules: the "IBM Quantum" lockup MAY be used; the standalone
-     8-bar IBM logo may NOT. Nothing here reproduces the 8-bar logo.
- */
+  /* IBM Quantum lockup */
   var IBM_QUANTUM_LOCKUP =
     '<a class="ibmq-link" href="https://quantum.cloud.ibm.com/" target="_blank" rel="noopener noreferrer">' +
       '<img class="ibmq" data-ibm-quantum-logo src="assets/img/IBM_Quantum_logotype_pos_RGB.png" alt="IBM Quantum" width="180" height="34" loading="lazy">' +

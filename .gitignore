@@ -13,16 +13,34 @@ Desktop.ini
 # Local tooling
 .claude/
 
-# Challenge files and archives
+# Challenge files and documents
+*.pdf
 *.pptx
-Quantum StealthShield.pdf
-Quantum StealthShield.pptx
+*.ppt
+*.docx
+*.doc
 *.zip
+*.tar.gz
+*.7z
 
-# Attendee data & Discord scripts
-attendees.csv
+# Attendee data & credentials
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.jsonl
+
+# Discord administration & bots
 verify_bot.py
 setup_discord.py
 clean_discord.py
+
+# Python cache & tooling
 __pycache__/
 *.pyc
+.env
+.env.*
+*.token
+*.pem
+*.key
+*.log
